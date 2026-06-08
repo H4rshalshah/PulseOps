@@ -1,0 +1,173 @@
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700&family=Syne:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  /* Light theme - white background, dark text */
+  :root {
+    --color-bg: #FFFFFF;
+    --color-surface: rgba(0, 0, 0, 0.02);
+    --color-border: rgba(0, 0, 0, 0.08);
+    --color-text: #0F172A;
+    --color-muted: #64748B;
+  }
+
+  /* Dark theme - pure black background, light text */
+  .dark {
+    --color-bg: #000000;
+    --color-surface: rgba(255, 255, 255, 0.02);
+    --color-border: rgba(255, 255, 255, 0.05);
+    --color-text: #C8CDD8;
+    --color-muted: #5A6785;
+  }
+
+  * {
+    @apply border-deadman-border;
+  }
+
+  html {
+    @apply bg-deadman-bg text-deadman-text;
+    scroll-behavior: smooth;
+    /* Only transition on the root element — inner elements inherit instantly */
+    transition: background-color 0.25s ease, color 0.25s ease;
+  }
+
+  body {
+    @apply font-body antialiased;
+  }
+
+  /* Color scheme for browser native elements */
+  html {
+    color-scheme: light;
+  }
+
+  html.dark {
+    color-scheme: dark;
+  }
+
+  /* Prevent transition conflict with Framer Motion animated elements */
+  [class*="react-flow"],
+  .no-theme-transition {
+    transition: none !important;
+  }
+}
+
+@layer components {
+  /* Custom scrollbar */
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: var(--color-bg);
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.12);
+    border-radius: 3px;
+  }
+
+  html.dark ::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.1);
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgba(0, 0, 0, 0.2);
+  }
+
+  html.dark ::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.2);
+  }
+
+  /* Selection */
+  ::selection {
+    background: #00D4FF40;
+    color: var(--color-text);
+  }
+
+  /* Focus ring */
+  *:focus-visible {
+    outline: 2px solid #00D4FF;
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+
+  /* Skeleton loading — use muted at low opacity so it's visible on black */
+  .skeleton {
+    @apply animate-pulse rounded;
+    background: rgba(90, 103, 133, 0.15);
+  }
+
+  /* Shimmer effect */
+  .shimmer {
+    background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.03) 50%, transparent 100%);
+    background-size: 200% 100%;
+    animation: shimmer 2s linear infinite;
+  }
+
+  .dark .shimmer {
+    background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.03) 50%, transparent 100%);
+  }
+}
+
+/* ReactFlow theme overrides */
+.react-flow__background {
+  background-color: var(--color-bg) !important;
+}
+
+.react-flow__controls-button {
+  background-color: var(--color-surface) !important;
+  border-color: var(--color-border) !important;
+  color: var(--color-text) !important;
+  fill: var(--color-text) !important;
+}
+
+.react-flow__controls-button:hover {
+  background-color: var(--color-border) !important;
+}
+
+.react-flow__minimap {
+  background-color: var(--color-bg) !important;
+}
+
+.react-flow__attribution {
+  display: none !important;
+}
+
+/* Recharts tooltip dark theme */
+.recharts-tooltip-wrapper {
+  outline: none !important;
+}
+
+/* Toast animations */
+@keyframes toast-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes toast-out {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+}
+
+/* Print styles for report export */
+@media print {
+  .no-print {
+    display: none !important;
+  }
+}
