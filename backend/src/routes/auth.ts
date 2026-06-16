@@ -18,6 +18,9 @@ router.get('/github/callback', AuthController.githubCallback);
 // Profile
 router.get('/me', requireAuth, AuthController.me);
 
+// Admin: reset any user's password (authenticated user only)
+router.post('/admin/reset-password', requireAuth, AuthController.adminResetPassword);
+
 // Email verification
 router.post('/verify-email', AuthController.verifyEmail);
 router.post('/forgot-password', AuthController.forgotPassword);

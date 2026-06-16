@@ -4,7 +4,7 @@ import { AuthRequest } from '../middleware/auth';
 import { z } from 'zod';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
-import { UserModel } from '../models/User';
+import { UserModel, WorkspaceMemberModel } from '../models/User';
 import { EmailService } from '../services/EmailService';
 import { v4 as uuidv4 } from 'uuid';
 
@@ -339,6 +339,46 @@ export class AuthController {
         return;
       }
       res.status(400).json({ error: 'Failed to reset password' });
+    }
+  }
+
+  /**
+   * Admin-only: Directly reset any user's password without email verification.
+   * Requires the requester to be a workspace owner or admin.
+   * Body: { email, newPassword, workspaceId }
+   */
+  static async adminResetPassword(req: AuthRequest, res: Response): Promise<void> {
+    try {
+      const { email, newPassword, workspaceId } = z.object({
+        email: z.string().email(),
+        newPassword: z.string().min(8).max(128),
+        workspaceId: z.string().min(1),
+      }).parse(req.body);
+
+      // Verify requester is workspace owner or admin
+      const requesterRole = await WorkspaceMemberModel.getRole(req.userId!, workspaceId);
+      if (!requesterRole || (requesterRole !== 'owner' && requesterRole !== 'admin')) {
+        res.status(403).json({ error: 'Only workspace owners and admins can reset passwords' });
+        return;
+      }
+
+      const targetUser = await UserModel.findByEmail(email);
+      if (!targetUser) {
+        res.status(404).json({ error: 'User not found' });
+        return;
+      }
+
+      // Only set passwordHash — don't change authProvider
+      const passwordHash = await bcrypt.hash(newPassword, 12);
+      await UserModel.update(targetUser.id, { passwordHash });
+
+      res.json({ success: true, message: `Password reset for ${email}` });
+    } catch (error) {
+      if (error instanceof z.ZodError) {
+        res.status(400).json({ error: 'Validation failed', details: error.errors });
+        return;
+      }
+      res.status(400).json({ error: error instanceof Error ? error.message : 'Failed to reset password' });
     }
   }
 }
