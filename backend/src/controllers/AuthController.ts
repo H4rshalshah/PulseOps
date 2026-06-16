@@ -14,11 +14,11 @@ const FRONTEND_URL = config.frontendUrl;
 
 // Store OAuth state values for CSRF protection (in production, use Redis)
 const oauthStateStore = new Map<string, number>();
+const OAUTH_STATE_TTL = 600000; // 10 minutes
 setInterval(() => {
-  // Clean up expired states (older than 10 minutes)
   const now = Date.now();
   for (const [key, time] of oauthStateStore) {
-    if (now - time > 600000) oauthStateStore.delete(key);
+    if (now - time > OAUTH_STATE_TTL) oauthStateStore.delete(key);
   }
 }, 60000);
 
@@ -46,47 +46,35 @@ const verifyEmailSchema = z.object({
   token: z.string().min(1),
 });
 
-// Shared helper to generate and store OAuth state
 function generateOAuthState(): string {
   const state = uuidv4();
   oauthStateStore.set(state, Date.now());
   return state;
 }
 
-// Response types for better typing
 export interface ForgotPasswordResponse {
   success: boolean;
   message: string;
   devResetLink?: string;
 }
 
-export interface ResetPasswordResponse {
-  success: boolean;
-}
-
-export interface VerifyEmailResponse {
-  success: boolean;
-}
-
-export interface LogoutResponse {
-  success: boolean;
-}
+export interface ResetPasswordResponse { success: boolean; }
+export interface VerifyEmailResponse { success: boolean; }
+export interface LogoutResponse { success: boolean; }
 
 export class AuthController {
   static async signup(req: Request, res: Response): Promise<void> {
     try {
       const parsed = signupSchema.parse(req.body);
       const result = await AuthService.signupEmail(parsed.name, parsed.email, parsed.password);
-      
-      // Create default workspace for new users
+
       const defaultName = `${parsed.name.split(' ')[0]}'s Workspace`;
       await AuthService.createWorkspace(result.user.id, defaultName);
 
-      // Send verification email (async, non-blocking)
       const verifyToken = jwt.sign({ userId: result.user.id }, JWT_SECRET, { expiresIn: '24h' });
       const verifyLink = `${FRONTEND_URL}/auth/verify-email?token=${verifyToken}`;
       EmailService.sendEmailVerification(parsed.email, verifyLink, parsed.name);
-      
+
       res.status(201).json(result);
     } catch (error) {
       if (error instanceof z.ZodError) {
@@ -112,7 +100,6 @@ export class AuthController {
   }
 
   static async logout(_req: Request, res: Response): Promise<void> {
-    // Stateless JWT - client discards token
     res.json({ success: true });
   }
 
@@ -144,8 +131,7 @@ export class AuthController {
   static async googleCallback(req: Request, res: Response): Promise<void> {
     try {
       const { code, state } = req.query;
-      
-      // Validate state for CSRF protection
+
       if (!state || typeof state !== 'string' || !oauthStateStore.has(state)) {
         res.redirect(`${FRONTEND_URL}/auth/login?error=invalid_state`);
         return;
@@ -164,7 +150,6 @@ export class AuthController {
         return;
       }
 
-      // Exchange code for tokens
       const tokenResponse = await fetch('https://oauth2.googleapis.com/token', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -183,21 +168,22 @@ export class AuthController {
         return;
       }
 
-      // Get user info from Google - fetches the user's data
+      // Get user info from Google
       const userResponse = await fetch('https://www.googleapis.com/oauth2/v2/userinfo', {
         headers: { Authorization: `Bearer ${tokens.access_token}` },
       });
       const profile: any = await userResponse.json();
 
-      // Use the user's actual data fetched from Google
+      // Pass googleId so AuthService stores it for persistent account linking
       const result = await AuthService.oAuthLogin('google', {
         email: profile.email,
         name: profile.name,
         avatarUrl: profile.picture,
+        providerId: profile.id, // Google's unique user ID
       });
 
       res.redirect(`${FRONTEND_URL}/auth/callback?token=${result.accessToken}`);
-    } catch (error) {
+    } catch (_error) {
       res.redirect(`${FRONTEND_URL}/auth/login?error=oauth_failed`);
     }
   }
@@ -217,8 +203,7 @@ export class AuthController {
   static async githubCallback(req: Request, res: Response): Promise<void> {
     try {
       const { code, state } = req.query;
-      
-      // Validate state for CSRF protection
+
       if (!state || typeof state !== 'string' || !oauthStateStore.has(state)) {
         res.redirect(`${FRONTEND_URL}/auth/login?error=invalid_state`);
         return;
@@ -237,7 +222,6 @@ export class AuthController {
         return;
       }
 
-      // Exchange code for token
       const tokenResponse = await fetch('https://github.com/login/oauth/access_token', {
         method: 'POST',
         headers: {
@@ -258,27 +242,27 @@ export class AuthController {
         return;
       }
 
-      // Get user info from GitHub - fetches the user's actual data
       const userResponse = await fetch('https://api.github.com/user', {
         headers: { Authorization: `Bearer ${tokens.access_token}` },
       });
       const profile: any = await userResponse.json();
 
-      // Get email from GitHub - fetches from user's email data
       const emailResponse = await fetch('https://api.github.com/user/emails', {
         headers: { Authorization: `Bearer ${tokens.access_token}` },
       });
-      const emails: Array<{primary?: boolean; email?: string}> = await emailResponse.json() as Array<{primary?: boolean; email?: string}>;
+      const emails: Array<{ primary?: boolean; email?: string }> = await emailResponse.json();
       const primaryEmail = emails.find((e: any) => e.primary)?.email || profile.email;
 
+      // Pass providerId (GitHub user ID) so AuthService stores it for persistent linking
       const result = await AuthService.oAuthLogin('github', {
         email: primaryEmail || `${profile.login}@github.com`,
         name: profile.name || profile.login,
         avatarUrl: profile.avatar_url,
+        providerId: String(profile.id), // GitHub's numeric user ID
       });
 
       res.redirect(`${FRONTEND_URL}/auth/callback?token=${result.accessToken}`);
-    } catch (error) {
+    } catch (_error) {
       res.redirect(`${FRONTEND_URL}/auth/login?error=oauth_failed`);
     }
   }
@@ -298,8 +282,7 @@ export class AuthController {
     try {
       const { email } = forgotPasswordSchema.parse(req.body);
       const user = await UserModel.findByEmail(email);
-      
-      // Always return success to avoid email enumeration
+
       if (!user || !user.passwordHash) {
         res.json({ success: true, message: 'If the account exists, a reset link has been sent.' });
         return;
@@ -307,11 +290,9 @@ export class AuthController {
 
       const resetToken = jwt.sign({ userId: user.id, email: user.email }, JWT_SECRET, { expiresIn: '1h' });
       const resetLink = `${FRONTEND_URL}/auth/reset-password?token=${resetToken}`;
-      
-      // Send email using the user's actual email (fetched from user data)
+
       const sent = await EmailService.sendPasswordReset(user.email, resetLink, user.name);
-      
-      // In development, also return the link directly for convenience
+
       const isDev = process.env.NODE_ENV === 'development';
       if (isDev) {
         res.json({
@@ -345,11 +326,6 @@ export class AuthController {
     }
   }
 
-  /**
-   * Admin-only: Directly reset any user's password without email verification.
-   * Requires the requester to be a workspace owner or admin.
-   * Body: { email, newPassword, workspaceId }
-   */
   static async adminResetPassword(req: AuthRequest, res: Response): Promise<void> {
     try {
       const { email, newPassword, workspaceId } = z.object({
@@ -358,7 +334,6 @@ export class AuthController {
         workspaceId: z.string().min(1),
       }).parse(req.body);
 
-      // Verify requester is workspace owner or admin
       const requesterRole = await WorkspaceMemberModel.getRole(req.userId!, workspaceId);
       if (!requesterRole || (requesterRole !== 'owner' && requesterRole !== 'admin')) {
         res.status(403).json({ error: 'Only workspace owners and admins can reset passwords' });
@@ -371,7 +346,6 @@ export class AuthController {
         return;
       }
 
-      // Only set passwordHash — don't change authProvider
       const passwordHash = await bcrypt.hash(newPassword, 12);
       await UserModel.update(targetUser.id, { passwordHash });
 

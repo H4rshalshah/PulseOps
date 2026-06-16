@@ -17,6 +17,7 @@ export interface HealthCheckRecord {
 
 export interface Project {
   id: string;
+  userId: string;
   workspaceId: string;
   name: string;
   description: string | null;
@@ -33,6 +34,7 @@ export interface Project {
 
 const ProjectSchema = new Schema({
   id: { type: String, default: () => uuidv4(), unique: true, index: true },
+  userId: { type: String, required: true, index: true },
   workspaceId: { type: String, required: true, index: true },
   name: { type: String, required: true },
   description: { type: String, default: null },
@@ -110,6 +112,7 @@ export class ProjectModel {
   }
 
   static async create(data: {
+    userId: string;
     workspaceId: string;
     name: string;
     description?: string;
@@ -120,6 +123,7 @@ export class ProjectModel {
   }): Promise<Project> {
     const project: Project = {
       id: uuidv4(),
+      userId: data.userId,
       workspaceId: data.workspaceId,
       name: data.name,
       description: data.description || null,

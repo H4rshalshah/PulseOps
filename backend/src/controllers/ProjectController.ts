@@ -80,7 +80,7 @@ export class ProjectController {
     try {
       const parsed = createProjectSchema.parse(req.body);
       if (!await ProjectController.requireWorkspaceRole(req, res, parsed.workspaceId, ['owner', 'admin', 'engineer'])) return;
-      const project = await ProjectModel.create(parsed);
+      const project = await ProjectModel.create({ ...parsed, userId: req.userId! });
       res.status(201).json(project);
     } catch (error) {
       if (error instanceof z.ZodError) {

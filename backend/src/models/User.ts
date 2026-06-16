@@ -12,6 +12,9 @@ export interface User {
   passwordHash: string | null;
   avatarUrl: string | null;
   authProvider: AuthProvider;
+  googleId: string | null;
+  githubId: string | null;
+  role: UserRole;
   emailVerified: boolean;
   currentWorkspaceId: string | null;
   createdAt: Date;
@@ -56,6 +59,9 @@ const UserSchema = new Schema({
   passwordHash: { type: String, default: null },
   avatarUrl: { type: String, default: null },
   authProvider: { type: String, enum: ['email', 'google', 'github'], default: 'email' },
+  googleId: { type: String, default: null, index: true },
+  githubId: { type: String, default: null, index: true },
+  role: { type: String, enum: ['owner', 'admin', 'engineer', 'viewer'], default: 'engineer' },
   emailVerified: { type: Boolean, default: false },
   currentWorkspaceId: { type: String, default: null },
   createdAt: { type: Date, default: Date.now },
@@ -166,6 +172,9 @@ export class UserModel {
       passwordHash: data.passwordHash || null,
       avatarUrl: data.avatarUrl || null,
       authProvider: data.authProvider || 'email',
+      googleId: data.googleId || null,
+      githubId: data.githubId || null,
+      role: data.role || 'engineer',
       emailVerified: data.emailVerified || false,
       currentWorkspaceId: data.currentWorkspaceId || null,
       createdAt: new Date(),
@@ -197,6 +206,18 @@ export class UserModel {
       return userMemoryStore.find((u) => u.authProvider === provider && u.email === email) || null;
     }
     const doc = await UserDocument.findOne({ authProvider: provider, email: email.toLowerCase() });
+    return doc ? normalize<User>(doc) : null;
+  }
+
+  static async findByGoogleId(googleId: string): Promise<User | null> {
+    if (isUsingMemoryStore()) return userMemoryStore.find((u) => u.googleId === googleId) || null;
+    const doc = await UserDocument.findOne({ googleId });
+    return doc ? normalize<User>(doc) : null;
+  }
+
+  static async findByGithubId(githubId: string): Promise<User | null> {
+    if (isUsingMemoryStore()) return userMemoryStore.find((u) => u.githubId === githubId) || null;
+    const doc = await UserDocument.findOne({ githubId });
     return doc ? normalize<User>(doc) : null;
   }
 }

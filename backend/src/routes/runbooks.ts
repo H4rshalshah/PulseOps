@@ -1,7 +1,10 @@
 import { Router } from 'express';
 import { RunbookController } from '../controllers/RunbookController';
+import { requireAuth } from '../middleware/auth';
 
 const router = Router();
+
+router.use(requireAuth);
 
 router.get('/', RunbookController.list);
 router.post('/', RunbookController.create);

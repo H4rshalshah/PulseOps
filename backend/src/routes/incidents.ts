@@ -1,7 +1,10 @@
 import { Router } from 'express';
 import { IncidentController } from '../controllers/IncidentController';
+import { requireAuth } from '../middleware/auth';
 
 const router = Router();
+
+router.use(requireAuth);
 
 router.get('/', IncidentController.list);
 router.post('/', IncidentController.create);

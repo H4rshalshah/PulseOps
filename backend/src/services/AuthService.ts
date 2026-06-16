@@ -52,7 +52,12 @@ export class AuthService {
     return { accessToken, user: safeUser };
   }
 
-  static async oAuthLogin(provider: AuthProvider, profile: { email: string; name: string; avatarUrl?: string }): Promise<AuthTokens> {
+  static async oAuthLogin(provider: AuthProvider, profile: { 
+    email: string; 
+    name: string; 
+    avatarUrl?: string;
+    providerId?: string; // googleId or githubId
+  }): Promise<AuthTokens> {
     let user = await UserModel.findByOAuth(provider, profile.email);
 
     if (!user) {
@@ -60,22 +65,35 @@ export class AuthService {
       const existingUser = await UserModel.findByEmail(profile.email);
       if (existingUser) {
         // Link OAuth to existing account — update provider, name, verify email, etc.
-        user = await UserModel.update(existingUser.id, {
+        const updates: Partial<User> = {
           authProvider: provider,
           name: profile.name || existingUser.name,
           avatarUrl: profile.avatarUrl || existingUser.avatarUrl,
           emailVerified: true,
-        });
+        };
+        // Store the provider-specific ID
+        if (provider === 'google' && profile.providerId) {
+          updates.googleId = profile.providerId;
+        } else if (provider === 'github' && profile.providerId) {
+          updates.githubId = profile.providerId;
+        }
+        user = await UserModel.update(existingUser.id, updates);
         if (!user) throw new Error('Failed to link OAuth account');
       } else {
         // Create new user for first-time OAuth sign-in
-        user = await UserModel.create({
+        const createData: Partial<User> & { email: string; name: string } = {
           name: profile.name,
           email: profile.email,
           avatarUrl: profile.avatarUrl || null,
           authProvider: provider,
           emailVerified: true,
-        });
+        };
+        if (provider === 'google' && profile.providerId) {
+          createData.googleId = profile.providerId;
+        } else if (provider === 'github' && profile.providerId) {
+          createData.githubId = profile.providerId;
+        }
+        user = await UserModel.create(createData);
         // Create default workspace for new OAuth users
         const defaultName = `${profile.name.split(' ')[0]}'s Workspace`;
         const slug = `${profile.name.toLowerCase().replace(/[^a-z0-9]/g, '-')}-workspace`;

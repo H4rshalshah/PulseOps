@@ -221,6 +221,7 @@ export function seedMemoryStore(force = false): void {
 
     memoryStore.incidents.push({
       id: uuidv4(),
+      userId: 'seed',
       title: incident.title,
       description: incident.description,
       severity: severities[i % severities.length],
@@ -255,6 +256,7 @@ export function seedMemoryStore(force = false): void {
 
     memoryStore.incidents.push({
       id: uuidv4(),
+      userId: 'seed',
       title: realisticIncidents[Math.floor(Math.random() * realisticIncidents.length)].title,
       description: 'Auto-resolved by DeadMan runbook execution. Full post-mortem available in reports.',
       severity: severities[Math.floor(Math.random() * severities.length)],

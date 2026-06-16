@@ -8,6 +8,7 @@ export type IncidentStatus = 'open' | 'investigating' | 'mitigating' | 'resolved
 
 export interface Incident {
   id: string;
+  userId: string;
   title: string;
   description: string | null;
   severity: IncidentSeverity;
@@ -23,6 +24,7 @@ export interface Incident {
 }
 
 export interface CreateIncidentInput {
+  userId?: string;
   title: string;
   description?: string;
   severity: IncidentSeverity;
@@ -46,6 +48,7 @@ export interface IncidentFilters {
 
 const IncidentSchema = new Schema({
   id: { type: String, default: () => uuidv4(), unique: true, index: true },
+  userId: { type: String, required: true, index: true },
   title: { type: String, required: true, index: 'text' },
   description: { type: String, default: null },
   severity: { type: String, enum: ['critical', 'high', 'medium', 'low'], required: true, index: true },
@@ -135,6 +138,7 @@ export class IncidentModel {
   static async create(input: CreateIncidentInput): Promise<Incident> {
     const incident: Incident = {
       id: uuidv4(),
+      userId: input.userId || '',
       title: input.title,
       description: input.description || null,
       severity: input.severity,

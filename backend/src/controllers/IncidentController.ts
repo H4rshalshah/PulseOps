@@ -55,10 +55,10 @@ export class IncidentController {
     }
   }
 
-  static async create(req: Request, res: Response): Promise<void> {
+  static async create(req: AuthRequest, res: Response): Promise<void> {
     try {
       const parsed = createIncidentSchema.parse(req.body);
-      const incident = await IncidentService.create(parsed);
+      const incident = await IncidentService.create({ ...parsed, userId: req.userId });
       res.status(201).json(incident);
     } catch (error) {
       if (error instanceof z.ZodError) {
