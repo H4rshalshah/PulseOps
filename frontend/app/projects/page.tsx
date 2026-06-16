@@ -102,7 +102,7 @@ export default function ProjectsPage() {
   };
 
   const handleCopyWebhook = (project: Project) => {
-    const url = `${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001'}/api/webhooks/alerts/${project.webhookToken}`;
+    const url = `${(process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001').trim()}/api/webhooks/alerts/${project.webhookToken}`;
     navigator.clipboard.writeText(url);
     toast.success('Webhook URL copied');
   };

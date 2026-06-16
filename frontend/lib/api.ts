@@ -2,7 +2,7 @@ import axios from 'axios';
 import type { Incident, Runbook, ActionExecution, Monitor, DashboardSummary, MTTRDataPoint, IncidentsByDay, SourceData, SituationReport, User, Workspace, WorkspaceMember, Invite, Project, AuthTokensResponse, ForgotPasswordResponse, ResetPasswordResponse, VerifyEmailResponse, LogoutResponse } from './types';
 
 const api = axios.create({
-  baseURL: process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001',
+  baseURL: (process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001').trim(),
   headers: { 'Content-Type': 'application/json' },
   timeout: 10000,
 });

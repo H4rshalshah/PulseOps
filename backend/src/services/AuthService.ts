@@ -56,19 +56,33 @@ export class AuthService {
     let user = await UserModel.findByOAuth(provider, profile.email);
 
     if (!user) {
-      user = await UserModel.create({
-        name: profile.name,
-        email: profile.email,
-        avatarUrl: profile.avatarUrl || null,
-        authProvider: provider,
-        emailVerified: true,
-      });
-      // Create default workspace for new OAuth users
-      const defaultName = `${profile.name.split(' ')[0]}'s Workspace`;
-      const slug = `${profile.name.toLowerCase().replace(/[^a-z0-9]/g, '-')}-workspace`;
-      const workspace = await WorkspaceModel.create({ name: defaultName, slug, ownerId: user.id });
-      await WorkspaceMemberModel.add({ workspaceId: workspace.id, userId: user.id, role: 'owner' });
-      await UserModel.update(user.id, { currentWorkspaceId: workspace.id });
+      // Check if user already exists with a different auth provider (e.g. email signup)
+      const existingUser = await UserModel.findByEmail(profile.email);
+      if (existingUser) {
+        // Link OAuth to existing account — update provider, name, verify email, etc.
+        user = await UserModel.update(existingUser.id, {
+          authProvider: provider,
+          name: profile.name || existingUser.name,
+          avatarUrl: profile.avatarUrl || existingUser.avatarUrl,
+          emailVerified: true,
+        });
+        if (!user) throw new Error('Failed to link OAuth account');
+      } else {
+        // Create new user for first-time OAuth sign-in
+        user = await UserModel.create({
+          name: profile.name,
+          email: profile.email,
+          avatarUrl: profile.avatarUrl || null,
+          authProvider: provider,
+          emailVerified: true,
+        });
+        // Create default workspace for new OAuth users
+        const defaultName = `${profile.name.split(' ')[0]}'s Workspace`;
+        const slug = `${profile.name.toLowerCase().replace(/[^a-z0-9]/g, '-')}-workspace`;
+        const workspace = await WorkspaceModel.create({ name: defaultName, slug, ownerId: user.id });
+        await WorkspaceMemberModel.add({ workspaceId: workspace.id, userId: user.id, role: 'owner' });
+        await UserModel.update(user.id, { currentWorkspaceId: workspace.id });
+      }
     }
 
     const accessToken = this.generateToken(user);
