@@ -1,0 +1,75 @@
+# DeadMan Backend — Render Deployment Config
+# https://dashboard.render.com
+#
+# 1. Create a new Web Service on Render
+# 2. Set Build Command: npm install && npm run build
+# 3. Set Start Command: npm start
+# 4. Add ALL env vars below
+
+services:
+  - type: web
+    name: deadman-backend
+    env: node
+    buildCommand: npm install && npm run build
+    startCommand: npm start
+    healthCheckPath: /api/health
+    envVars:
+      # ── Node ──────────────────────────────────────────────
+      - key: NODE_ENV
+        value: production
+
+      # ── Database (MongoDB Atlas) ──────────────────────────
+      - key: MONGO_URI
+        sync: false  # Set manually: mongodb+srv://user:pass@cluster.mongodb.net/deadman?retryWrites=true&w=majority
+
+      # ── Redis (for BullMQ—optional in MVP) ────────────────
+      - key: REDIS_URL
+        sync: false
+
+      # ── Secrets ───────────────────────────────────────────
+      - key: JWT_SECRET
+        sync: false  # Generate: openssl rand -hex 32
+      - key: SESSION_SECRET
+        sync: false
+      - key: ENCRYPTION_SECRET
+        sync: false  # Generate: openssl rand -hex 16
+
+      # ── URLs ──────────────────────────────────────────────
+      - key: FRONTEND_URL
+        value: https://deadman-inky.vercel.app  # ← CHANGE to your Vercel frontend URL
+      - key: BACKEND_URL
+        value: https://deadman-backend.onrender.com  # ← CHANGE to your Render backend URL
+
+      # ── OAuth: Google ─────────────────────────────────────
+      - key: GOOGLE_CLIENT_ID
+        sync: false  # From Google Cloud Console → Credentials
+      - key: GOOGLE_CLIENT_SECRET
+        sync: false
+      - key: GOOGLE_CALLBACK_URL
+        value: https://deadman-backend.onrender.com/api/auth/google/callback  # ← CHANGE to match production
+
+      # ── OAuth: GitHub ─────────────────────────────────────
+      - key: GITHUB_CLIENT_ID
+        sync: false  # From GitHub → Settings → Developer Settings → OAuth Apps
+      - key: GITHUB_CLIENT_SECRET
+        sync: false
+      - key: GITHUB_CALLBACK_URL
+        value: https://deadman-backend.onrender.com/api/auth/github/callback  # ← CHANGE to match production
+
+      # ── Email (for password reset) ────────────────────────
+      - key: EMAIL_HOST
+        sync: false
+      - key: EMAIL_USER
+        sync: false
+      - key: EMAIL_PASS
+        sync: false
+      - key: EMAIL_FROM
+        value: noreply@deadman.dev
+
+      # ── Notifications ─────────────────────────────────────
+      - key: SLACK_WEBHOOK_URL
+        sync: false
+      - key: PAGERDUTY_API_KEY
+        sync: false
+      - key: GITHUB_TOKEN
+        sync: false

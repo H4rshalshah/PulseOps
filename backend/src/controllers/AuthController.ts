@@ -123,7 +123,7 @@ export class AuthController {
       return;
     }
     const state = generateOAuthState();
-    const redirectUri = `${config.backendUrl}/api/auth/google/callback`;
+    const redirectUri = config.googleCallbackUrl;
     const url = `https://accounts.google.com/o/oauth2/v2/auth?client_id=${encodeURIComponent(clientId)}&redirect_uri=${encodeURIComponent(redirectUri)}&response_type=code&scope=email%20profile&state=${encodeURIComponent(state)}`;
     res.redirect(url);
   }
@@ -157,7 +157,7 @@ export class AuthController {
           code,
           client_id: clientId,
           client_secret: clientSecret,
-          redirect_uri: `${config.backendUrl}/api/auth/google/callback`,
+          redirect_uri: config.googleCallbackUrl,
           grant_type: 'authorization_code',
         }),
       });
@@ -195,7 +195,7 @@ export class AuthController {
       return;
     }
     const state = generateOAuthState();
-    const redirectUri = `${config.backendUrl}/api/auth/github/callback`;
+    const redirectUri = config.githubCallbackUrl;
     const url = `https://github.com/login/oauth/authorize?client_id=${encodeURIComponent(clientId)}&redirect_uri=${encodeURIComponent(redirectUri)}&scope=user:email&state=${encodeURIComponent(state)}`;
     res.redirect(url);
   }
@@ -232,7 +232,7 @@ export class AuthController {
           client_id: clientId,
           client_secret: clientSecret,
           code,
-          redirect_uri: `${config.backendUrl}/api/auth/github/callback`,
+          redirect_uri: config.githubCallbackUrl,
         }),
       });
 
@@ -250,7 +250,7 @@ export class AuthController {
       const emailResponse = await fetch('https://api.github.com/user/emails', {
         headers: { Authorization: `Bearer ${tokens.access_token}` },
       });
-      const emails: Array<{ primary?: boolean; email?: string }> = await emailResponse.json();
+      const emails = (await emailResponse.json()) as Array<{ primary?: boolean; email?: string }>;
       const primaryEmail = emails.find((e: any) => e.primary)?.email || profile.email;
 
       // Pass providerId (GitHub user ID) so AuthService stores it for persistent linking

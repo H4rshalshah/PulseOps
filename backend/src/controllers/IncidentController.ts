@@ -1,4 +1,5 @@
 import { Request, Response } from 'express';
+import { AuthRequest } from '../middleware/auth';
 import { IncidentService } from '../services/IncidentService';
 import { SituationReportService } from '../services/SituationReportService';
 import { RunbookModel } from '../models/Runbook';
