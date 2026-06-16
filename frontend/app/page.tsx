@@ -88,12 +88,6 @@ export default function LandingPage() {
               Start Free
               <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
             </Link>
-            <Link
-              href="/auth/login"
-              className="flex items-center gap-2 px-8 py-3.5 border border-deadman-border text-deadman-text font-medium rounded-xl hover:bg-deadman-surface transition-all"
-            >
-              Sign In
-            </Link>
             <a
               href="#how-it-works"
               className="flex items-center gap-2 px-8 py-3.5 text-deadman-muted hover:text-deadman-text transition-colors text-sm"
@@ -291,10 +285,10 @@ export default function LandingPage() {
             Get started in minutes. Connect your monitoring, create runbooks, and let DeadMan handle the rest.
           </p>
           <Link
-            href="/dashboard"
-            className="inline-flex items-center gap-2 px-8 py-3.5 bg-deadman-cyan text-deadman-bg font-semibold rounded-xl hover:bg-deadman-cyan/90 transition-all hover:shadow-lg hover:shadow-deadman-cyan/20 hover:shadow-deadman-cyanLight/10"
+            href="/auth/signup"
+            className="inline-flex items-center gap-2 px-8 py-3.5 bg-deadman-cyan text-deadman-bg font-semibold rounded-xl hover:bg-deadman-cyan/90 transition-all hover:shadow-lg hover:shadow-deadman-cyan/20"
           >
-            Go to Dashboard
+            Get Started
             <ArrowRight size={18} />
           </Link>
         </motion.div>
