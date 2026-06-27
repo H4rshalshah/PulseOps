@@ -83,13 +83,13 @@
 
   /* Selection */
   ::selection {
-    background: rgba(99, 102, 241, 0.25);
+    background: rgba(0, 212, 255, 0.25);
     color: var(--color-text);
   }
 
-  /* Focus ring - indigo */
+  /* Focus ring */
   *:focus-visible {
-    outline: 2px solid #6366F1;
+    outline: 2px solid #00D4FF;
     outline-offset: 2px;
     border-radius: 4px;
   }
@@ -119,23 +119,23 @@
   }
 
   .card-hover:hover {
-    border-color: rgba(99, 102, 241, 0.3);
+    border-color: rgba(0, 212, 255, 0.3);
     box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.08), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
   }
 
   .dark .card-hover:hover {
-    border-color: rgba(99, 102, 241, 0.3);
+    border-color: rgba(0, 212, 255, 0.3);
     box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.2);
   }
 
   /* Button utilities */
   .btn-primary {
-    @apply inline-flex items-center justify-center gap-2 px-4 py-2 text-sm font-medium text-white rounded-xl transition-all;
-    background-color: #6366F1;
+    @apply inline-flex items-center justify-center gap-2 px-4 py-2 text-sm font-medium text-black rounded-xl transition-all;
+    background-color: #00D4FF;
   }
 
   .btn-primary:hover {
-    background-color: #4F46E5;
+    background-color: #00B8D9;
   }
 
   .btn-primary:disabled {
@@ -145,13 +145,13 @@
 
   .btn-secondary {
     @apply inline-flex items-center justify-center gap-2 px-4 py-2 text-sm font-medium rounded-xl border transition-all;
-    border-color: #6366F1;
-    color: #6366F1;
+    border-color: #00D4FF;
+    color: #00D4FF;
     background-color: transparent;
   }
 
   .btn-secondary:hover {
-    background-color: rgba(99, 102, 241, 0.08);
+    background-color: rgba(0, 212, 255, 0.08);
   }
 
   .btn-danger {

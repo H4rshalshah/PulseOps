@@ -170,8 +170,7 @@ export default function DashboardPage() {
           </button>
           <button
             onClick={handleManualIncident}
-            className="flex items-center gap-2 px-4 py-2 text-sm font-medium text-white rounded-xl transition-all shadow-card"
-            style={{ backgroundColor: '#6366F1' }}
+            className="flex items-center gap-2 px-4 py-2 text-sm font-medium text-white rounded-xl transition-all shadow-card bg-pulseops-cyan hover:bg-pulseops-cyan/90"
           >
             <Zap size={14} />
             Trigger Incident
@@ -186,9 +185,9 @@ export default function DashboardPage() {
             <div className="relative">
               <button
                 onClick={() => setShowWsDropdown(!showWsDropdown)}
-                className="flex items-center gap-2 px-4 py-2.5 bg-white dark:bg-pulseops-bg border border-pulseops-border rounded-xl text-sm text-pulseops-text hover:border-pulseops-accent/30 transition-all shadow-sm"
+                className="flex items-center gap-2 px-4 py-2.5 bg-white dark:bg-pulseops-bg border border-pulseops-border rounded-xl text-sm text-pulseops-text hover:border-pulseops-cyan/30 transition-all shadow-sm"
               >
-                <Layout size={15} style={{ color: '#6366F1' }} />
+                <Layout size={15} className="text-pulseops-cyan" />
                 <span className="font-medium">
                   {loadingUser ? 'Loading...' : currentWorkspace?.name || 'Select workspace'}
                 </span>
@@ -213,19 +212,19 @@ export default function DashboardPage() {
                           onClick={() => handleSwitchWorkspace(ws)}
                           className={`w-full flex items-center gap-3 px-3 py-3 text-sm transition-colors ${
                             ws.id === currentWorkspace?.id
-                              ? 'text-pulseops-accent bg-indigo-50 dark:bg-indigo-500/10'
+                              ? 'text-pulseops-cyan bg-pulseops-cyan/10'
                               : 'text-pulseops-text hover:bg-gray-50 dark:hover:bg-pulseops-border/30'
                           }`}
                         >
-                          <div className="w-7 h-7 rounded-lg flex items-center justify-center shrink-0" style={{ backgroundColor: 'rgba(99, 102, 241, 0.15)' }}>
-                            <span className="text-[10px] font-bold" style={{ color: '#6366F1' }}>{ws.name.charAt(0)}</span>
+                          <div className="w-7 h-7 rounded-lg bg-pulseops-cyan/15 flex items-center justify-center shrink-0">
+                            <span className="text-[10px] font-bold text-pulseops-cyan">{ws.name.charAt(0)}</span>
                           </div>
                           <div className="flex-1 text-left min-w-0">
                             <p className="text-sm font-medium truncate">{ws.name}</p>
                             <p className="text-[11px] text-pulseops-muted capitalize">{ws.role || 'member'}</p>
                           </div>
                           {ws.id === currentWorkspace?.id && (
-                            <span className="w-1.5 h-1.5 rounded-full shrink-0" style={{ backgroundColor: '#6366F1' }} />
+                            <span className="w-1.5 h-1.5 rounded-full shrink-0 bg-pulseops-cyan" />
                           )}
                         </button>
                       ))
@@ -233,10 +232,7 @@ export default function DashboardPage() {
                     <div className="border-t border-pulseops-border p-2">
                       <button
                         onClick={() => { setShowWsDropdown(false); setShowWorkspaceCreate(true); }}
-                        className="flex items-center gap-2 w-full px-3 py-2.5 text-sm rounded-lg transition-colors"
-                        style={{ color: '#6366F1' }}
-                        onMouseEnter={(e) => { (e.target as HTMLElement).style.backgroundColor = 'rgba(99, 102, 241, 0.08)'; }}
-                        onMouseLeave={(e) => { (e.target as HTMLElement).style.backgroundColor = 'transparent'; }}
+                        className="flex items-center gap-2 w-full px-3 py-2.5 text-sm rounded-lg text-pulseops-cyan transition-colors hover:bg-pulseops-cyan/10"
                       >
                         <Plus size={14} />
                         Create Workspace
@@ -268,9 +264,8 @@ export default function DashboardPage() {
                 onChange={(e) => setNewWorkspaceName(e.target.value)}
                 placeholder="Enter workspace name..."
                 className="flex-1 bg-white dark:bg-pulseops-bg border border-pulseops-border rounded-lg px-4 py-2.5 text-sm text-pulseops-text placeholder-pulseops-muted/60 outline-none transition-colors"
-                style={{} as React.CSSProperties}
-                onFocus={(e) => { e.target.style.borderColor = '#6366F1'; }}
-                onBlur={(e) => { e.target.style.borderColor = ''; }}
+                onFocus={(e) => { (e.target as HTMLInputElement).style.borderColor = '#00D4FF'; }}
+                onBlur={(e) => { (e.target as HTMLInputElement).style.borderColor = ''; }}
                 onKeyDown={(e) => e.key === 'Enter' && handleCreateWorkspace()}
               />
               <button
@@ -299,16 +294,17 @@ export default function DashboardPage() {
               {workspaces.map((ws) => (
                 <div
                   key={ws.id}
-                  className="flex items-center justify-between px-4 py-3 rounded-lg transition-colors cursor-pointer"
+                  className={`flex items-center justify-between px-4 py-3 rounded-lg transition-all cursor-pointer hover:bg-gray-50 dark:hover:bg-white/[0.06] ${
+                    ws.id === currentWorkspace?.id ? 'bg-pulseops-cyan/[0.06]' : ''
+                  }`}
                   style={{
-                    backgroundColor: ws.id === currentWorkspace?.id ? 'rgba(99, 102, 241, 0.06)' : 'transparent',
-                    borderLeft: ws.id === currentWorkspace?.id ? '3px solid #6366F1' : '3px solid transparent',
+                    borderLeft: ws.id === currentWorkspace?.id ? '3px solid #00D4FF' : '3px solid transparent',
                   }}
                   onClick={() => handleSwitchWorkspace(ws)}
                 >
                   <div className="flex items-center gap-3">
-                    <div className="w-8 h-8 rounded-lg flex items-center justify-center shrink-0" style={{ backgroundColor: 'rgba(99, 102, 241, 0.12)' }}>
-                      <span className="text-xs font-bold" style={{ color: '#6366F1' }}>{ws.name.charAt(0)}</span>
+                    <div className="w-8 h-8 rounded-lg bg-pulseops-cyan/15 flex items-center justify-center shrink-0">
+                      <span className="text-xs font-bold text-pulseops-cyan">{ws.name.charAt(0)}</span>
                     </div>
                     <div>
                       <p className="text-sm font-medium text-pulseops-text">{ws.name}</p>
@@ -334,10 +330,10 @@ export default function DashboardPage() {
                 if (action.onClick) action.onClick();
                 else if (action.href.startsWith('/')) router.push(action.href);
               }}
-              className="flex items-center gap-2 px-4 py-2.5 bg-white dark:bg-pulseops-surface border border-pulseops-border rounded-xl text-sm hover:border-pulseops-accent/30 transition-all shadow-card card-hover group"
+              className="flex items-center gap-2 px-4 py-2.5 bg-white dark:bg-pulseops-surface border border-pulseops-border rounded-xl text-sm hover:border-pulseops-cyan/30 hover:bg-gray-50 dark:hover:bg-white/[0.06] transition-all shadow-card card-hover group"
             >
               <Icon size={15} className={action.color} />
-              <span className="text-pulseops-text group-hover:text-pulseops-accent transition-colors">{action.label}</span>
+              <span className="text-pulseops-text group-hover:text-pulseops-cyan transition-colors">{action.label}</span>
               <ArrowRight size={13} className="text-pulseops-muted group-hover:translate-x-0.5 transition-transform" />
             </button>
           );
@@ -346,10 +342,10 @@ export default function DashboardPage() {
 
       {/* Onboarding for new users - no workspace */}
       {!loadingUser && !hasWorkspace && (
-        <div className="bg-gradient-to-r from-indigo-50 to-white dark:from-indigo-500/5 dark:to-pulseops-surface border border-pulseops-accent/20 rounded-xl p-6 shadow-card">
+        <div className="bg-gradient-to-r from-pulseops-cyan/5 to-white dark:from-pulseops-cyan/5 dark:to-pulseops-surface border border-pulseops-cyan/20 rounded-xl p-6 shadow-card">
           <div className="flex items-start gap-4">
-            <div className="w-10 h-10 rounded-xl flex items-center justify-center shrink-0" style={{ backgroundColor: 'rgba(99, 102, 241, 0.15)' }}>
-              <Bell size={20} style={{ color: '#6366F1' }} />
+            <div className="w-10 h-10 rounded-xl bg-pulseops-cyan/15 flex items-center justify-center shrink-0">
+              <Bell size={20} className="text-pulseops-cyan" />
             </div>
             <div className="flex-1">
               <h3 className="text-base font-heading font-bold text-pulseops-text mb-1">Welcome to PulseOps!</h3>

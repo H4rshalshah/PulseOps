@@ -14,15 +14,11 @@ const config: Config = {
           bg: 'var(--color-bg)',
           surface: 'var(--color-surface)',
           border: 'var(--color-border)',
-          // Primary accent - indigo
-          accent: '#6366F1',
-          accentLight: '#818CF8',
-          accentDark: '#4F46E5',
-          accentGlow: 'rgba(99, 102, 241, 0.12)',
-          // Backward-compatible cyan → indigo aliases
-          cyan: '#6366F1',
-          cyanLight: '#818CF8',
-          cyanGlow: 'rgba(99, 102, 241, 0.12)',
+          // Original cyan accent color
+          cyan: '#00D4FF',
+          cyanLight: '#006680',
+          cyanGlow: '#00D4FF20',
+          accent: '#00D4FF',
           danger: '#EF4444',
           warning: '#F59E0B',
           success: '#10B981',

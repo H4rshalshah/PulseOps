@@ -53,9 +53,9 @@ export default function Sidebar() {
       {/* Workspace selector */}
       {workspace && (
         <div className="px-4 py-3 border-b border-pulseops-border">
-          <div className="flex items-center gap-2 px-3 py-2.5 rounded-lg" style={{ backgroundColor: 'rgba(99, 102, 241, 0.08)' }}>
-            <div className="w-6 h-6 rounded flex items-center justify-center shrink-0" style={{ backgroundColor: 'rgba(99, 102, 241, 0.2)' }}>
-              <span className="text-[9px] font-bold" style={{ color: '#6366F1' }}>{workspace.name.charAt(0)}</span>
+          <div className="flex items-center gap-2 px-3 py-2.5 rounded-lg bg-pulseops-cyan/10">
+            <div className="w-6 h-6 rounded flex items-center justify-center shrink-0 bg-pulseops-cyan/20">
+              <span className="text-[9px] font-bold text-pulseops-cyan">{workspace.name.charAt(0)}</span>
             </div>
             <div className="flex-1 min-w-0">
               <p className="text-xs font-semibold text-pulseops-text truncate">{workspace.name}</p>
@@ -76,14 +76,14 @@ export default function Sidebar() {
               <div
                 className={`relative flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-all ${
                   isActive
-                    ? 'text-pulseops-accent bg-indigo-50 dark:bg-indigo-500/10'
+                    ? 'text-pulseops-cyan bg-pulseops-cyan/10'
                     : 'text-pulseops-text-secondary hover:text-pulseops-text hover:bg-gray-50 dark:hover:bg-pulseops-border/30'
                 }`}
               >
                 {isActive && (
-                  <span className="absolute left-0 top-0.5 bottom-0.5 w-0.5 rounded-r-full" style={{ backgroundColor: '#6366F1' }} />
+                  <span className="absolute left-0 top-0.5 bottom-0.5 w-0.5 rounded-r-full bg-pulseops-cyan" />
                 )}
-                <Icon size={18} className="shrink-0" style={isActive ? { color: '#6366F1' } : undefined} />
+                <Icon size={18} className={`shrink-0 ${isActive ? 'text-pulseops-cyan' : ''}`} />
                 <span>{item.label}</span>
               </div>
             </Link>

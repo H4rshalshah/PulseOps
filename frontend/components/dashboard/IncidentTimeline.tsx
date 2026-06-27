@@ -31,7 +31,7 @@ export default function IncidentTimeline({ incidents }: IncidentTimelineProps) {
             initial={{ opacity: 0, x: -10 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: i * 0.05 }}
-            className="flex items-center gap-3 py-2 px-2 rounded-lg hover:bg-pulseops-border/30 transition-colors"
+            className="flex items-center gap-3 py-2 px-2 rounded-lg hover:bg-gray-50 dark:hover:bg-white/[0.06] hover:shadow-sm transition-all"
           >
             {/* Timeline dot */}
             <div className={`w-2 h-2 rounded-full shrink-0 ${
