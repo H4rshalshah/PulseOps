@@ -42,19 +42,19 @@ export default function SituationReportComponent({ incidentId }: SituationReport
   };
 
   return (
-    <div className="bg-deadman-bg border border-deadman-border rounded-xl overflow-hidden">
+    <div className="bg-pulseops-bg border border-pulseops-border rounded-xl overflow-hidden">
       {/* Header */}
-      <div className="flex items-center justify-between px-4 py-3 border-b border-deadman-border bg-deadman-surface">
+      <div className="flex items-center justify-between px-4 py-3 border-b border-pulseops-border bg-pulseops-surface">
         <div className="flex items-center gap-2">
-          <div className="w-2 h-2 bg-deadman-danger rounded-full" />
-          <span className="text-sm font-mono text-deadman-muted">Situation Report</span>
+          <div className="w-2 h-2 bg-pulseops-danger rounded-full" />
+          <span className="text-sm font-mono text-pulseops-muted">Situation Report</span>
         </div>
         <div className="flex items-center gap-2">
           {report && (
             <>
               <motion.button
                 onClick={copyToClipboard}
-                className="p-1.5 rounded hover:bg-deadman-border text-deadman-muted hover:text-deadman-text transition-colors"
+                className="p-1.5 rounded hover:bg-pulseops-border text-pulseops-muted hover:text-pulseops-text transition-colors"
                 whileHover={{ scale: 1.1 }}
               >
                 <Clipboard size={14} />
@@ -68,8 +68,8 @@ export default function SituationReportComponent({ incidentId }: SituationReport
       <div className="p-4 font-mono text-sm">
         {loading ? (
           <div className="flex items-center gap-3 py-8 justify-center">
-            <Loader2 size={20} className="text-deadman-cyan animate-spin" />
-            <span className="text-deadman-muted">Generating situation report...</span>
+            <Loader2 size={20} className="text-pulseops-cyan animate-spin" />
+            <span className="text-pulseops-muted">Generating situation report...</span>
           </div>
         ) : report ? (
           <AnimatePresence mode="wait">
@@ -81,7 +81,7 @@ export default function SituationReportComponent({ incidentId }: SituationReport
             >
               {/* Summary */}
               <div>
-                <div className="text-deadman-cyan mb-1">$ ./analyze --incident={incidentId.substring(0, 8)}</div>
+                <div className="text-pulseops-cyan mb-1">$ ./analyze --incident={incidentId.substring(0, 8)}</div>
                 <TerminalText
                   text={`[${new Date(report.generatedAt).toLocaleString()}] Analysis complete.`}
                   speed={20}
@@ -92,19 +92,19 @@ export default function SituationReportComponent({ incidentId }: SituationReport
                 {/* Affected Services */}
                 <Section title="Affected Services">
                   {report.affectedServices.map((svc, i) => (
-                    <div key={i} className="text-deadman-danger">✗ {svc}</div>
+                    <div key={i} className="text-pulseops-danger">✗ {svc}</div>
                   ))}
                 </Section>
 
                 {/* Recent Deployments */}
                 <Section title="Recent Deployments (2h)">
                   {report.recentDeployments.length === 0 ? (
-                    <div className="text-deadman-muted">No recent deployments found</div>
+                    <div className="text-pulseops-muted">No recent deployments found</div>
                   ) : (
                     report.recentDeployments.map((commit, i) => (
-                      <div key={i} className="flex items-start gap-2 text-deadman-text">
-                        <span className="text-deadman-muted">{commit.sha}</span>
-                        <span className="text-deadman-warning">|</span>
+                      <div key={i} className="flex items-start gap-2 text-pulseops-text">
+                        <span className="text-pulseops-muted">{commit.sha}</span>
+                        <span className="text-pulseops-warning">|</span>
                         <span className="truncate">{commit.message}</span>
                       </div>
                     ))
@@ -113,13 +113,13 @@ export default function SituationReportComponent({ incidentId }: SituationReport
 
                 {/* Error Rate */}
                 <Section title="Error Rate (30min)">
-                  <div className="flex items-center gap-4 text-deadman-text">
-                    <span className="text-deadman-muted">Current:</span>
-                    <span className="text-deadman-danger">
+                  <div className="flex items-center gap-4 text-pulseops-text">
+                    <span className="text-pulseops-muted">Current:</span>
+                    <span className="text-pulseops-danger">
                       {report.errorRateData[report.errorRateData.length - 1]?.rate.toFixed(1)}%
                     </span>
-                    <span className="text-deadman-muted">| Avg:</span>
-                    <span className="text-deadman-warning">
+                    <span className="text-pulseops-muted">| Avg:</span>
+                    <span className="text-pulseops-warning">
                       {(report.errorRateData.reduce((a, b) => a + b.rate, 0) / report.errorRateData.length).toFixed(1)}%
                     </span>
                   </div>
@@ -128,10 +128,10 @@ export default function SituationReportComponent({ incidentId }: SituationReport
                 {/* Similar Incidents */}
                 <Section title="Similar Past Incidents">
                   {report.similarPastIncidents.length === 0 ? (
-                    <div className="text-deadman-muted">No similar incidents found</div>
+                    <div className="text-pulseops-muted">No similar incidents found</div>
                   ) : (
                     report.similarPastIncidents.slice(0, 3).map((inc, i) => (
-                      <div key={i} className="text-deadman-text">• {inc.title}</div>
+                      <div key={i} className="text-pulseops-text">• {inc.title}</div>
                     ))
                   )}
                 </Section>
@@ -139,7 +139,7 @@ export default function SituationReportComponent({ incidentId }: SituationReport
                 {/* Recommended Actions */}
                 <Section title="Recommended Actions">
                   {report.recommendedActions.map((action, i) => (
-                    <div key={i} className="text-deadman-success">→ {action}</div>
+                    <div key={i} className="text-pulseops-success">→ {action}</div>
                   ))}
                 </Section>
               </div>
@@ -147,10 +147,10 @@ export default function SituationReportComponent({ incidentId }: SituationReport
           </AnimatePresence>
         ) : (
           <div className="text-center py-8">
-            <p className="text-deadman-muted">Click generate to create a situation report</p>
+            <p className="text-pulseops-muted">Click generate to create a situation report</p>
             <motion.button
               onClick={generateReport}
-              className="mt-3 px-4 py-2 bg-deadman-cyan/10 text-deadman-cyan border border-deadman-cyan/20 rounded-lg text-sm hover:bg-deadman-cyan/20 transition-colors"
+              className="mt-3 px-4 py-2 bg-pulseops-cyan/10 text-pulseops-cyan border border-pulseops-cyan/20 rounded-lg text-sm hover:bg-pulseops-cyan/20 transition-colors"
               whileHover={{ scale: 1.02 }}
             >
               Generate Report
@@ -165,7 +165,7 @@ export default function SituationReportComponent({ incidentId }: SituationReport
 function Section({ title, children }: { title: string; children: React.ReactNode }) {
   return (
     <div>
-      <div className="text-deadman-muted mb-1"># {title}</div>
+      <div className="text-pulseops-muted mb-1"># {title}</div>
       <div className="ml-4 space-y-0.5">{children}</div>
     </div>
   );

@@ -1,7 +1,7 @@
 {
-  "name": "deadman-backend",
+  "name": "pulseops-backend",
   "version": "1.0.0",
-  "description": "DeadMan Automated Incident Response System - Backend",
+  "description": "PulseOps Automated Incident Response System - Backend",
   "main": "dist/index.js",
   "scripts": {
     "build": "tsc",

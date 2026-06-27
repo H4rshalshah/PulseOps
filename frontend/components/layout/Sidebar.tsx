@@ -39,27 +39,27 @@ export default function Sidebar() {
   }, []);
 
   const handleLogout = () => {
-    localStorage.removeItem('deadman_token');
+    localStorage.removeItem('pulseops_token');
     router.push('/auth/login');
   };
 
   return (
-    <aside className="fixed left-0 top-0 h-screen w-64 bg-deadman-surface border-r border-deadman-border flex flex-col z-50">
+    <aside className="fixed left-0 top-0 h-screen w-64 bg-pulseops-surface border-r border-pulseops-border flex flex-col z-50">
       {/* Header */}
-      <div className="p-5 border-b border-deadman-border">
+      <div className="p-5 border-b border-pulseops-border">
         <Logo size={28} />
       </div>
 
       {/* Workspace selector */}
       {workspace && (
-        <div className="px-4 py-3 border-b border-deadman-border">
-          <div className="flex items-center gap-2 px-3 py-2 bg-deadman-cyan/10 rounded-lg">
-            <div className="w-5 h-5 rounded bg-deadman-cyan/20 flex items-center justify-center">
-              <span className="text-[8px] font-bold text-deadman-cyan">{workspace.name.charAt(0)}</span>
+        <div className="px-4 py-3 border-b border-pulseops-border">
+          <div className="flex items-center gap-2 px-3 py-2 bg-pulseops-cyan/10 rounded-lg">
+            <div className="w-5 h-5 rounded bg-pulseops-cyan/20 flex items-center justify-center">
+              <span className="text-[8px] font-bold text-pulseops-cyan">{workspace.name.charAt(0)}</span>
             </div>
             <div className="flex-1 min-w-0">
-              <p className="text-xs font-medium text-deadman-text truncate">{workspace.name}</p>
-              <p className="text-[10px] text-deadman-muted capitalize">{workspace.role || 'member'}</p>
+              <p className="text-xs font-medium text-pulseops-text truncate">{workspace.name}</p>
+              <p className="text-[10px] text-pulseops-muted capitalize">{workspace.role || 'member'}</p>
             </div>
           </div>
         </div>
@@ -76,12 +76,12 @@ export default function Sidebar() {
               <div
                 className={`relative flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-all ${
                   isActive
-                    ? 'text-deadman-cyan bg-deadman-cyanLight/10'
-                    : 'text-deadman-muted hover:text-deadman-text hover:bg-deadman-border/50'
+                    ? 'text-pulseops-cyan bg-pulseops-cyanLight/10'
+                    : 'text-pulseops-muted hover:text-pulseops-text hover:bg-pulseops-border/50'
                 }`}
               >
                 {isActive && (
-                  <span className="absolute left-0 top-0 w-1 h-full bg-gradient-to-b from-deadman-cyan to-deadman-cyanLight rounded-r-full" />
+                  <span className="absolute left-0 top-0 w-1 h-full bg-gradient-to-b from-pulseops-cyan to-pulseops-cyanLight rounded-r-full" />
                 )}
                 <Icon size={18} className="shrink-0" />
                 <span>{item.label}</span>
@@ -92,16 +92,16 @@ export default function Sidebar() {
       </nav>
 
       {/* Logout */}
-      <div className="p-3 border-t border-deadman-border">
+      <div className="p-3 border-t border-pulseops-border">
         <button
           onClick={handleLogout}
-          className="flex items-center gap-2 w-full px-3 py-2 rounded-lg text-sm text-deadman-muted hover:text-deadman-danger hover:bg-deadman-danger/10 transition-all"
+          className="flex items-center gap-2 w-full px-3 py-2 rounded-lg text-sm text-pulseops-muted hover:text-pulseops-danger hover:bg-pulseops-danger/10 transition-all"
         >
           <LogOut size={16} />
           <span>Sign Out</span>
         </button>
-        <div className="flex items-center gap-2 mt-2 px-3 text-xs text-deadman-muted">
-          <Activity size={12} className="text-deadman-success" />
+        <div className="flex items-center gap-2 mt-2 px-3 text-xs text-pulseops-muted">
+          <Activity size={12} className="text-pulseops-success" />
           <span>All systems nominal</span>
         </div>
       </div>

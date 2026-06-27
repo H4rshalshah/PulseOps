@@ -182,12 +182,12 @@ export function seedMemoryStore(force = false): void {
   memoryStore.actionExecutions = [];
   memoryStore.monitors = [];
   memoryStore.settings = [
-    { id: uuidv4(), category: 'general', key: 'app_name', value: 'DeadMan', updated_at: new Date() },
+    { id: uuidv4(), category: 'general', key: 'app_name', value: 'PulseOps', updated_at: new Date() },
     { id: uuidv4(), category: 'general', key: 'timezone', value: 'UTC', updated_at: new Date() },
     { id: uuidv4(), category: 'slack', key: 'slack_webhook_url', value: '', updated_at: new Date() },
     { id: uuidv4(), category: 'slack', key: 'slack_channel', value: '#incident-response', updated_at: new Date() },
     { id: uuidv4(), category: 'github', key: 'github_token', value: '', updated_at: new Date() },
-    { id: uuidv4(), category: 'github', key: 'github_repo', value: 'acmecorp/deadman-infra', updated_at: new Date() },
+    { id: uuidv4(), category: 'github', key: 'github_repo', value: 'acmecorp/pulseops-infra', updated_at: new Date() },
     { id: uuidv4(), category: 'pagerduty', key: 'pagerduty_api_key', value: '', updated_at: new Date() },
     { id: uuidv4(), category: 'pagerduty', key: 'pagerduty_service', value: 'production-oncall', updated_at: new Date() },
   ];
@@ -258,7 +258,7 @@ export function seedMemoryStore(force = false): void {
       id: uuidv4(),
       userId: 'seed',
       title: realisticIncidents[Math.floor(Math.random() * realisticIncidents.length)].title,
-      description: 'Auto-resolved by DeadMan runbook execution. Full post-mortem available in reports.',
+      description: 'Auto-resolved by PulseOps runbook execution. Full post-mortem available in reports.',
       severity: severities[Math.floor(Math.random() * severities.length)],
       status: 'resolved',
       source: src,

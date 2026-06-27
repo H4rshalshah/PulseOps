@@ -1,9 +1,9 @@
-# DeadMan Backend — Render Deployment Configuration
+# PulseOps Backend — Render Deployment Configuration
 services:
   - type: web
-    name: deadman-backend
+    name: pulseops-backend
     env: docker
-    repo: https://github.com/H4rshalshah/DeadMan
+    repo: https://github.com/H4rshalshah/PulseOps
     dockerfilePath: ./backend/Dockerfile
     rootDir: ./backend
     healthCheckPath: /api/health
@@ -13,11 +13,11 @@ services:
       - key: NODE_ENV
         value: production
       - key: CORS_ORIGIN
-        value: https://deadman-frontend.vercel.app
+        value: https://pulseops-frontend.vercel.app
       - key: FRONTEND_URL
-        value: https://deadman-frontend.vercel.app
+        value: https://pulseops-frontend.vercel.app
       - key: BACKEND_URL
-        value: https://deadman-backend.onrender.com
+        value: https://pulseops-backend.onrender.com
       - key: JWT_SECRET
         generateValue: true
       - key: SESSION_SECRET

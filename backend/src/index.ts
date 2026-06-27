@@ -164,7 +164,7 @@ process.on('SIGTERM', () => {
     }
 
     httpServer.listen(config.port, () => {
-      logger.info(`DeadMan backend running on port ${config.port}`);
+      logger.info(`PulseOps backend running on port ${config.port}`);
       logger.info(`Environment: ${config.nodeEnv}`);
       logger.info(`Persistence: ${isUsingMemoryStore() ? 'in-memory fallback' : 'MongoDB'}`);
       logger.info(`WebSocket server ready`);

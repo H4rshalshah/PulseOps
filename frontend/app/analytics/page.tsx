@@ -14,12 +14,12 @@ const SourcePieChart = dynamic(() => import('@/components/analytics/SourcePieCha
 
 function ChartSkeleton({ title }: { title: string }) {
   return (
-    <div className="bg-deadman-surface border border-deadman-border rounded-xl p-5">
-      <h3 className="text-sm font-medium text-deadman-text mb-4">{title}</h3>
+    <div className="bg-pulseops-surface border border-pulseops-border rounded-xl p-5">
+      <h3 className="text-sm font-medium text-pulseops-text mb-4">{title}</h3>
       <div className="h-[300px] flex items-center justify-center">
         <div className="flex flex-col items-center gap-3">
-          <Loader2 size={20} className="text-deadman-cyan animate-spin" />
-          <span className="text-xs text-deadman-muted">Loading chart...</span>
+          <Loader2 size={20} className="text-pulseops-cyan animate-spin" />
+          <span className="text-xs text-pulseops-muted">Loading chart...</span>
         </div>
       </div>
     </div>
@@ -79,12 +79,12 @@ export default function AnalyticsPage() {
   if (error) {
     return (
       <div className="flex flex-col items-center justify-center py-24">
-        <AlertCircle size={48} className="text-deadman-danger mb-4" />
-        <h2 className="text-xl font-heading font-bold text-deadman-text mb-2">Failed to Load Analytics</h2>
-        <p className="text-sm text-deadman-muted mb-6">{error}</p>
+        <AlertCircle size={48} className="text-pulseops-danger mb-4" />
+        <h2 className="text-xl font-heading font-bold text-pulseops-text mb-2">Failed to Load Analytics</h2>
+        <p className="text-sm text-pulseops-muted mb-6">{error}</p>
         <button
           onClick={() => window.location.reload()}
-          className="px-4 py-2 bg-deadman-cyan/10 text-deadman-cyan border border-deadman-cyan/20 rounded-lg text-sm hover:bg-deadman-cyan/20 transition-colors"
+          className="px-4 py-2 bg-pulseops-cyan/10 text-pulseops-cyan border border-pulseops-cyan/20 rounded-lg text-sm hover:bg-pulseops-cyan/20 transition-colors"
         >
           Retry
         </button>
@@ -96,8 +96,8 @@ export default function AnalyticsPage() {
     <div className="space-y-6">
       {/* Header */}
       <div>
-        <h1 className="text-2xl font-heading font-bold text-deadman-text">Analytics</h1>
-        <p className="text-sm text-deadman-muted mt-1">Incident metrics and trends</p>
+        <h1 className="text-2xl font-heading font-bold text-pulseops-text">Analytics</h1>
+        <p className="text-sm text-pulseops-muted mt-1">Incident metrics and trends</p>
       </div>
 
       {/* Metric Cards - always visible, skeleton during load */}
@@ -105,24 +105,24 @@ export default function AnalyticsPage() {
         {loading ? (
           <>
             {[1, 2, 3, 4].map((i) => (
-              <div key={i} className="bg-deadman-surface border border-deadman-border rounded-xl p-5 animate-pulse">
-                <div className="h-4 w-24 bg-deadman-border rounded mb-4" />
-                <div className="h-8 w-16 bg-deadman-border rounded" />
+              <div key={i} className="bg-pulseops-surface border border-pulseops-border rounded-xl p-5 animate-pulse">
+                <div className="h-4 w-24 bg-pulseops-border rounded mb-4" />
+                <div className="h-8 w-16 bg-pulseops-border rounded" />
               </div>
             ))}
           </>
         ) : (
           <>
             {[
-              { icon: TrendingUp, label: 'Resolution Rate', value: `${resolutionRate}%`, color: 'text-deadman-success' },
-              { icon: BarChart3, label: 'Total Incidents (30d)', value: totalIncidents.toString(), color: 'text-deadman-cyan' },
-              { icon: Activity, label: 'Avg Incidents/Day', value: avgPerDay, color: 'text-deadman-warning' },
-              { icon: PieChartIcon, label: 'Sources', value: sources.length.toString(), color: 'text-deadman-muted' },
+              { icon: TrendingUp, label: 'Resolution Rate', value: `${resolutionRate}%`, color: 'text-pulseops-success' },
+              { icon: BarChart3, label: 'Total Incidents (30d)', value: totalIncidents.toString(), color: 'text-pulseops-cyan' },
+              { icon: Activity, label: 'Avg Incidents/Day', value: avgPerDay, color: 'text-pulseops-warning' },
+              { icon: PieChartIcon, label: 'Sources', value: sources.length.toString(), color: 'text-pulseops-muted' },
             ].map((stat, i) => (
-              <div key={i} className="bg-deadman-surface border border-deadman-border rounded-xl p-5">
+              <div key={i} className="bg-pulseops-surface border border-pulseops-border rounded-xl p-5">
                 <div className="flex items-center gap-2 mb-2">
                   <stat.icon size={14} className={stat.color} />
-                  <span className="text-xs text-deadman-muted">{stat.label}</span>
+                  <span className="text-xs text-pulseops-muted">{stat.label}</span>
                 </div>
                 <p className={`text-2xl font-bold font-mono ${stat.color}`}>{stat.value}</p>
               </div>
@@ -133,30 +133,30 @@ export default function AnalyticsPage() {
 
       {/* Charts Grid - loaded lazily with per-chart skeletons */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        <div className="bg-deadman-surface border border-deadman-border rounded-xl p-5">
-          <h3 className="text-sm font-medium text-deadman-text mb-4">MTTR Trend (Minutes)</h3>
+        <div className="bg-pulseops-surface border border-pulseops-border rounded-xl p-5">
+          <h3 className="text-sm font-medium text-pulseops-text mb-4">MTTR Trend (Minutes)</h3>
           {loading ? <ChartSkeleton title="" /> : <MTTRLineChart data={mttrChartData} />}
         </div>
 
-        <div className="bg-deadman-surface border border-deadman-border rounded-xl p-5">
-          <h3 className="text-sm font-medium text-deadman-text mb-4">Incidents by Severity</h3>
+        <div className="bg-pulseops-surface border border-pulseops-border rounded-xl p-5">
+          <h3 className="text-sm font-medium text-pulseops-text mb-4">Incidents by Severity</h3>
           {loading ? <ChartSkeleton title="" /> : <SeverityBarChart data={severityChartData.slice(-14)} />}
         </div>
 
-        <div className="bg-deadman-surface border border-deadman-border rounded-xl p-5">
-          <h3 className="text-sm font-medium text-deadman-text mb-4">Incident Sources</h3>
+        <div className="bg-pulseops-surface border border-pulseops-border rounded-xl p-5">
+          <h3 className="text-sm font-medium text-pulseops-text mb-4">Incident Sources</h3>
           {loading ? <ChartSkeleton title="" /> : <SourcePieChart data={sources} colors={COLORS} />}
         </div>
 
         {/* Summary Stats — no heavy lib, no lazy needed */}
-        <div className="bg-deadman-surface border border-deadman-border rounded-xl p-5">
-          <h3 className="text-sm font-medium text-deadman-text mb-4">Incident Summary</h3>
+        <div className="bg-pulseops-surface border border-pulseops-border rounded-xl p-5">
+          <h3 className="text-sm font-medium text-pulseops-text mb-4">Incident Summary</h3>
           {loading ? (
             <div className="space-y-4">
               {[1, 2, 3, 4, 5].map((i) => (
                 <div key={i} className="flex items-center justify-between py-2 animate-pulse">
-                  <div className="h-4 w-32 bg-deadman-border rounded" />
-                  <div className="h-4 w-20 bg-deadman-border rounded" />
+                  <div className="h-4 w-32 bg-pulseops-border rounded" />
+                  <div className="h-4 w-20 bg-pulseops-border rounded" />
                 </div>
               ))}
             </div>
@@ -165,15 +165,15 @@ export default function AnalyticsPage() {
               {incidentsByDay.slice(-7).reverse().map((day, i) => (
                 <div
                   key={day.date}
-                  className="flex items-center justify-between py-2 border-b border-deadman-border last:border-0"
+                  className="flex items-center justify-between py-2 border-b border-pulseops-border last:border-0"
                 >
-                  <span className="text-sm text-deadman-text">{format(parseISO(day.date), 'EEEE, MMM dd')}</span>
+                  <span className="text-sm text-pulseops-text">{format(parseISO(day.date), 'EEEE, MMM dd')}</span>
                   <div className="flex items-center gap-3">
-                    <span className="text-xs text-deadman-danger font-mono">{day.critical}C</span>
-                    <span className="text-xs text-deadman-warning font-mono">{day.high}H</span>
-                    <span className="text-xs text-deadman-cyan font-mono">{day.medium}M</span>
-                    <span className="text-xs text-deadman-muted font-mono">|</span>
-                    <span className="text-sm font-mono text-deadman-text">{day.total}</span>
+                    <span className="text-xs text-pulseops-danger font-mono">{day.critical}C</span>
+                    <span className="text-xs text-pulseops-warning font-mono">{day.high}H</span>
+                    <span className="text-xs text-pulseops-cyan font-mono">{day.medium}M</span>
+                    <span className="text-xs text-pulseops-muted font-mono">|</span>
+                    <span className="text-sm font-mono text-pulseops-text">{day.total}</span>
                   </div>
                 </div>
               ))}

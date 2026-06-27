@@ -10,7 +10,7 @@ const api = axios.create({
 // Add auth token interceptor
 api.interceptors.request.use((config) => {
   if (typeof window !== 'undefined') {
-    const token = localStorage.getItem('deadman_token');
+    const token = localStorage.getItem('pulseops_token');
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
     }
@@ -22,7 +22,7 @@ api.interceptors.response.use(
   (response) => response,
   (error) => {
     if (error?.response?.status === 401 && typeof window !== 'undefined') {
-      localStorage.removeItem('deadman_token');
+      localStorage.removeItem('pulseops_token');
       if (!window.location.pathname.startsWith('/auth')) {
         window.location.href = '/auth/login';
       }

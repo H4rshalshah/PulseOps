@@ -26,11 +26,11 @@ const stepIcons: Record<string, typeof Terminal> = {
 };
 
 const statusColors: Record<ExecutionStatus, string> = {
-  pending: 'text-deadman-muted bg-deadman-border/30',
-  running: 'text-deadman-cyan bg-deadman-cyan/10',
-  success: 'text-deadman-success bg-deadman-success/10',
-  failed: 'text-deadman-danger bg-deadman-danger/10',
-  skipped: 'text-deadman-warning bg-deadman-warning/10',
+  pending: 'text-pulseops-muted bg-pulseops-border/30',
+  running: 'text-pulseops-cyan bg-pulseops-cyan/10',
+  success: 'text-pulseops-success bg-pulseops-success/10',
+  failed: 'text-pulseops-danger bg-pulseops-danger/10',
+  skipped: 'text-pulseops-warning bg-pulseops-warning/10',
 };
 
 export default function IncidentDetailPage() {
@@ -76,7 +76,7 @@ export default function IncidentDetailPage() {
   if (loading) {
     return (
       <div className="flex items-center justify-center py-24">
-        <Loader2 size={32} className="text-deadman-cyan animate-spin" />
+        <Loader2 size={32} className="text-pulseops-cyan animate-spin" />
       </div>
     );
   }
@@ -84,12 +84,12 @@ export default function IncidentDetailPage() {
   if (error || !incident) {
     return (
       <div className="text-center py-24">
-        <AlertTriangle size={48} className="mx-auto mb-4 text-deadman-danger" />
-        <h2 className="text-xl font-heading font-bold text-deadman-text mb-2">Incident Not Found</h2>
-        <p className="text-deadman-muted mb-4">{error || 'The incident you are looking for does not exist'}</p>
+        <AlertTriangle size={48} className="mx-auto mb-4 text-pulseops-danger" />
+        <h2 className="text-xl font-heading font-bold text-pulseops-text mb-2">Incident Not Found</h2>
+        <p className="text-pulseops-muted mb-4">{error || 'The incident you are looking for does not exist'}</p>
         <button
           onClick={() => router.push('/incidents')}
-          className="px-4 py-2 bg-deadman-cyan/10 text-deadman-cyan border border-deadman-cyan/20 rounded-lg text-sm hover:bg-deadman-cyan/20 transition-colors"
+          className="px-4 py-2 bg-pulseops-cyan/10 text-pulseops-cyan border border-pulseops-cyan/20 rounded-lg text-sm hover:bg-pulseops-cyan/20 transition-colors"
         >
           Back to Incidents
         </button>
@@ -104,7 +104,7 @@ export default function IncidentDetailPage() {
       {/* Back button */}
       <button
         onClick={() => router.push('/incidents')}
-        className="flex items-center gap-2 text-sm text-deadman-muted hover:text-deadman-text transition-colors"
+        className="flex items-center gap-2 text-sm text-pulseops-muted hover:text-pulseops-text transition-colors"
       >
         <ArrowLeft size={16} />
         Back to Incidents
@@ -115,8 +115,8 @@ export default function IncidentDetailPage() {
         <div className="flex items-start gap-4">
           <PulseRing severity={incident.severity} size={16} className="mt-1" />
           <div>
-            <h1 className="text-2xl font-heading font-bold text-deadman-text">{incident.title}</h1>
-            <div className="flex items-center gap-3 mt-2 text-sm text-deadman-muted">
+            <h1 className="text-2xl font-heading font-bold text-pulseops-text">{incident.title}</h1>
+            <div className="flex items-center gap-3 mt-2 text-sm text-pulseops-muted">
               <StatusBadge status={incident.status} />
               <span className="capitalize">Severity: {incident.severity}</span>
               <span>•</span>
@@ -132,7 +132,7 @@ export default function IncidentDetailPage() {
           <button
             onClick={handleReRun}
             disabled={running}
-            className="flex items-center gap-2 px-4 py-2 text-sm font-medium text-deadman-cyan bg-deadman-cyan/10 border border-deadman-cyan/20 rounded-xl hover:bg-deadman-cyan/20 disabled:opacity-50 transition-all"
+            className="flex items-center gap-2 px-4 py-2 text-sm font-medium text-pulseops-cyan bg-pulseops-cyan/10 border border-pulseops-cyan/20 rounded-xl hover:bg-pulseops-cyan/20 disabled:opacity-50 transition-all"
           >
             {running ? (
               <Loader2 size={14} className="animate-spin" />
@@ -143,7 +143,7 @@ export default function IncidentDetailPage() {
           </button>
           <button
             onClick={handleResolve}
-            className="flex items-center gap-2 px-4 py-2 text-sm font-medium text-deadman-success bg-deadman-success/10 border border-deadman-success/20 rounded-xl hover:bg-deadman-success/20 transition-all"
+            className="flex items-center gap-2 px-4 py-2 text-sm font-medium text-pulseops-success bg-pulseops-success/10 border border-pulseops-success/20 rounded-xl hover:bg-pulseops-success/20 transition-all"
           >
             <CheckCircle size={14} />
             Mark Resolved
@@ -153,8 +153,8 @@ export default function IncidentDetailPage() {
 
       {/* Description */}
       {incident.description && (
-        <div className="bg-deadman-surface border border-deadman-border rounded-xl p-4">
-          <p className="text-sm text-deadman-text">{incident.description}</p>
+        <div className="bg-pulseops-surface border border-pulseops-border rounded-xl p-4">
+          <p className="text-sm text-pulseops-text">{incident.description}</p>
         </div>
       )}
 
@@ -166,9 +166,9 @@ export default function IncidentDetailPage() {
           { label: 'MTTR', value: incident.mttr_seconds ? `${Math.round(incident.mttr_seconds / 60)} minutes` : '—' },
           { label: 'Runbook', value: incident.runbook?.name || 'None assigned' },
         ].map((item, i) => (
-          <div key={i} className="bg-deadman-surface border border-deadman-border rounded-xl p-4">
-            <p className="text-xs text-deadman-muted mb-1">{item.label}</p>
-            <p className="text-sm font-mono text-deadman-text">{item.value}</p>
+          <div key={i} className="bg-pulseops-surface border border-pulseops-border rounded-xl p-4">
+            <p className="text-xs text-pulseops-muted mb-1">{item.label}</p>
+            <p className="text-sm font-mono text-pulseops-text">{item.value}</p>
           </div>
         ))}
       </div>
@@ -179,18 +179,18 @@ export default function IncidentDetailPage() {
         <SituationReportComponent incidentId={id} />
 
         {/* Execution Timeline */}
-        <div className="bg-deadman-bg border border-deadman-border rounded-xl overflow-hidden">
-          <div className="flex items-center justify-between px-4 py-3 border-b border-deadman-border bg-deadman-surface">
+        <div className="bg-pulseops-bg border border-pulseops-border rounded-xl overflow-hidden">
+          <div className="flex items-center justify-between px-4 py-3 border-b border-pulseops-border bg-pulseops-surface">
             <div className="flex items-center gap-2">
-              <Terminal size={14} className="text-deadman-cyan" />
-              <span className="text-sm font-mono text-deadman-muted">Execution Timeline</span>
+              <Terminal size={14} className="text-pulseops-cyan" />
+              <span className="text-sm font-mono text-pulseops-muted">Execution Timeline</span>
             </div>
           </div>
 
           <div className="p-4 space-y-2 max-h-[500px] overflow-y-auto">
             {executions.length === 0 ? (
               <div className="text-center py-8">
-                <p className="text-sm text-deadman-muted">No executions recorded</p>
+                <p className="text-sm text-pulseops-muted">No executions recorded</p>
               </div>
             ) : (
               executions.map((exec) => {
@@ -198,25 +198,25 @@ export default function IncidentDetailPage() {
                 return (
                   <div
                     key={exec.id}
-                    className="flex items-start gap-3 p-3 rounded-lg bg-deadman-surface border border-deadman-border"
+                    className="flex items-start gap-3 p-3 rounded-lg bg-pulseops-surface border border-pulseops-border"
                   >
                     <div className={`p-1.5 rounded-lg ${statusColors[exec.status]}`}>
                       <Icon size={14} />
                     </div>
                     <div className="flex-1 min-w-0">
                       <div className="flex items-center gap-2">
-                        <span className="text-sm font-medium text-deadman-text">{exec.step_name}</span>
+                        <span className="text-sm font-medium text-pulseops-text">{exec.step_name}</span>
                         <span className={`text-[10px] font-medium px-1.5 py-0.5 rounded-full ${statusColors[exec.status]}`}>
                           {exec.status}
                         </span>
                       </div>
-                      <p className="text-xs text-deadman-muted mt-0.5 font-mono">{exec.action_type}</p>
+                      <p className="text-xs text-pulseops-muted mt-0.5 font-mono">{exec.action_type}</p>
                       {exec.error_message && (
-                        <p className="text-xs text-deadman-danger mt-1">{exec.error_message}</p>
+                        <p className="text-xs text-pulseops-danger mt-1">{exec.error_message}</p>
                       )}
                     </div>
                     {exec.duration_ms != null && (
-                      <span className="text-xs font-mono text-deadman-muted shrink-0">
+                      <span className="text-xs font-mono text-pulseops-muted shrink-0">
                         {exec.duration_ms}ms
                       </span>
                     )}                    </div>
@@ -229,11 +229,11 @@ export default function IncidentDetailPage() {
 
       {/* Metadata JSON */}
       {incident.metadata && (
-        <details className="bg-deadman-surface border border-deadman-border rounded-xl">
-          <summary className="px-4 py-3 text-sm font-mono text-deadman-muted cursor-pointer hover:text-deadman-text transition-colors">
+        <details className="bg-pulseops-surface border border-pulseops-border rounded-xl">
+          <summary className="px-4 py-3 text-sm font-mono text-pulseops-muted cursor-pointer hover:text-pulseops-text transition-colors">
             Raw Metadata
           </summary>
-          <pre className="px-4 pb-4 text-xs font-mono text-deadman-muted overflow-x-auto">
+          <pre className="px-4 pb-4 text-xs font-mono text-pulseops-muted overflow-x-auto">
             {JSON.stringify(incident.metadata, null, 2)}
           </pre>
         </details>

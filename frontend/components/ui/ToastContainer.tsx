@@ -12,10 +12,10 @@ const icons = {
 };
 
 const colors = {
-  success: 'border-deadman-success bg-deadman-success/10 text-deadman-success',
-  error: 'border-deadman-danger bg-deadman-danger/10 text-deadman-danger',
-  info: 'border-deadman-cyan bg-deadman-cyan/10 text-deadman-cyan',
-  warning: 'border-deadman-warning bg-deadman-warning/10 text-deadman-warning',
+  success: 'border-pulseops-success bg-pulseops-success/10 text-pulseops-success',
+  error: 'border-pulseops-danger bg-pulseops-danger/10 text-pulseops-danger',
+  info: 'border-pulseops-cyan bg-pulseops-cyan/10 text-pulseops-cyan',
+  warning: 'border-pulseops-warning bg-pulseops-warning/10 text-pulseops-warning',
 };
 
 export default function ToastContainer() {

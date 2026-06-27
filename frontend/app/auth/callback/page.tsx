@@ -22,7 +22,7 @@ export default function AuthCallbackPage() {
     }
 
     if (token) {
-      localStorage.setItem('deadman_token', token);
+      localStorage.setItem('pulseops_token', token);
       setStatus('Authentication successful! Redirecting...');
       setTimeout(() => router.push('/dashboard'), 1000);
     } else {
@@ -32,7 +32,7 @@ export default function AuthCallbackPage() {
   }, [searchParams, router]);
 
   return (
-    <div className="min-h-screen bg-deadman-bg flex items-center justify-center px-4">
+    <div className="min-h-screen bg-pulseops-bg flex items-center justify-center px-4">
       <motion.div
         initial={{ opacity: 0, scale: 0.9 }}
         animate={{ opacity: 1, scale: 1 }}
@@ -47,8 +47,8 @@ export default function AuthCallbackPage() {
           </motion.div>
         </div>
         <div className="flex items-center justify-center gap-3">
-          <Loader2 size={20} className="text-deadman-cyan animate-spin" />
-          <p className="text-deadman-muted">{status}</p>
+          <Loader2 size={20} className="text-pulseops-cyan animate-spin" />
+          <p className="text-pulseops-muted">{status}</p>
         </div>
       </motion.div>
     </div>

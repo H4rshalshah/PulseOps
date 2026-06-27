@@ -14,7 +14,7 @@ import { Webhook, Plus, RefreshCw, Loader2 } from 'lucide-react';
 
 const MTTRChart = dynamic(() => import('@/components/dashboard/MTTRChart'), {
   ssr: false,
-  loading: () => <div className="h-[300px] bg-deadman-surface border border-deadman-border rounded-xl animate-pulse flex items-center justify-center"><Loader2 size={20} className="text-deadman-cyan animate-spin" /></div>,
+  loading: () => <div className="h-[300px] bg-pulseops-surface border border-pulseops-border rounded-xl animate-pulse flex items-center justify-center"><Loader2 size={20} className="text-pulseops-cyan animate-spin" /></div>,
 });
 
 export default function DashboardPage() {
@@ -81,22 +81,22 @@ export default function DashboardPage() {
       {/* Header */}
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-heading font-bold text-deadman-text">Dashboard</h1>
-          <p className="text-sm text-deadman-muted mt-1">
+          <h1 className="text-2xl font-heading font-bold text-pulseops-text">Dashboard</h1>
+          <p className="text-sm text-pulseops-muted mt-1">
             {new Date().toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' })}
           </p>
         </div>
         <div className="flex items-center gap-3">
           <button
             onClick={handleTestWebhook}
-            className="flex items-center gap-2 px-4 py-2 text-sm font-medium text-deadman-warning bg-deadman-warning/10 border border-deadman-warning/20 rounded-xl hover:bg-deadman-warning/20 transition-all"
+            className="flex items-center gap-2 px-4 py-2 text-sm font-medium text-pulseops-warning bg-pulseops-warning/10 border border-pulseops-warning/20 rounded-xl hover:bg-pulseops-warning/20 transition-all"
           >
             <Webhook size={14} />
             Test Webhook
           </button>
           <button
             onClick={handleManualIncident}
-            className="flex items-center gap-2 px-4 py-2 text-sm font-medium text-deadman-bg bg-deadman-cyan rounded-xl hover:bg-deadman-cyan/90 transition-all"
+            className="flex items-center gap-2 px-4 py-2 text-sm font-medium text-pulseops-bg bg-pulseops-cyan rounded-xl hover:bg-pulseops-cyan/90 transition-all"
           >
             <Plus size={14} />
             Trigger Incident
@@ -142,16 +142,16 @@ export default function DashboardPage() {
         {/* Sidebar */}
         <div className="space-y-6">
           {/* Quick Stats */}
-          <div className="bg-deadman-surface border border-deadman-border rounded-xl p-5">
-            <h3 className="text-sm font-medium text-deadman-text mb-4">Quick Overview</h3>
+          <div className="bg-pulseops-surface border border-pulseops-border rounded-xl p-5">
+            <h3 className="text-sm font-medium text-pulseops-text mb-4">Quick Overview</h3>
             <div className="space-y-3">
               {[
-                { label: 'Resolved Today', value: summary?.resolved_today ?? 0, color: 'text-deadman-success' },
-                { label: 'Avg Response Time', value: summary?.avg_mttr ? `${Math.round(summary.avg_mttr / 60)}m` : '—', color: 'text-deadman-cyan' },
-                { label: 'System Status', value: 'Operational', color: 'text-deadman-success' },
+                { label: 'Resolved Today', value: summary?.resolved_today ?? 0, color: 'text-pulseops-success' },
+                { label: 'Avg Response Time', value: summary?.avg_mttr ? `${Math.round(summary.avg_mttr / 60)}m` : '—', color: 'text-pulseops-cyan' },
+                { label: 'System Status', value: 'Operational', color: 'text-pulseops-success' },
               ].map((stat, i) => (
-                <div key={i} className="flex items-center justify-between py-2 border-b border-deadman-border last:border-0">
-                  <span className="text-sm text-deadman-muted">{stat.label}</span>
+                <div key={i} className="flex items-center justify-between py-2 border-b border-pulseops-border last:border-0">
+                  <span className="text-sm text-pulseops-muted">{stat.label}</span>
                   <span className={`text-sm font-mono font-medium ${stat.color}`}>{stat.value}</span>
                 </div>
               ))}
@@ -159,10 +159,10 @@ export default function DashboardPage() {
           </div>
 
           {/* Live indicator */}
-          <div className="flex items-center gap-2 px-4 py-3 bg-deadman-surface border border-deadman-border rounded-xl">
-            <span className="w-2 h-2 bg-deadman-success rounded-full animate-pulse" />
-            <span className="text-xs text-deadman-muted">WebSocket connected — live updates active</span>
-            <RefreshCw size={12} className="ml-auto text-deadman-muted" />
+          <div className="flex items-center gap-2 px-4 py-3 bg-pulseops-surface border border-pulseops-border rounded-xl">
+            <span className="w-2 h-2 bg-pulseops-success rounded-full animate-pulse" />
+            <span className="text-xs text-pulseops-muted">WebSocket connected — live updates active</span>
+            <RefreshCw size={12} className="ml-auto text-pulseops-muted" />
           </div>
         </div>
       </div>

@@ -10,7 +10,7 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        deadman: {
+        pulseops: {
           bg: 'var(--color-bg)',
           surface: 'var(--color-surface)',
           border: 'var(--color-border)',

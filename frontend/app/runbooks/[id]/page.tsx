@@ -116,7 +116,7 @@ export default function RunbookEditorPage() {
   if (loading) {
     return (
       <div className="flex items-center justify-center py-24">
-        <Loader2 size={24} className="text-deadman-cyan animate-spin" />
+        <Loader2 size={24} className="text-pulseops-cyan animate-spin" />
       </div>
     );
   }
@@ -125,7 +125,7 @@ export default function RunbookEditorPage() {
     <div className="space-y-6">
       <button
         onClick={() => router.push('/runbooks')}
-        className="flex items-center gap-2 text-sm text-deadman-muted hover:text-deadman-text transition-colors"
+        className="flex items-center gap-2 text-sm text-pulseops-muted hover:text-pulseops-text transition-colors"
       >
         <ArrowLeft size={16} />
         Back to Runbooks
@@ -138,25 +138,25 @@ export default function RunbookEditorPage() {
             value={runbook.name}
             onChange={(e) => setRunbook((prev) => ({ ...prev, name: e.target.value }))}
             placeholder="Runbook name..."
-            className="text-2xl font-heading font-bold bg-transparent border-b border-transparent hover:border-deadman-border focus:border-deadman-cyan outline-none text-deadman-text placeholder-deadman-muted/50 transition-colors w-full"
+            className="text-2xl font-heading font-bold bg-transparent border-b border-transparent hover:border-pulseops-border focus:border-pulseops-cyan outline-none text-pulseops-text placeholder-pulseops-muted/50 transition-colors w-full"
           />
           <input
             type="text"
             value={runbook.description}
             onChange={(e) => setRunbook((prev) => ({ ...prev, description: e.target.value }))}
             placeholder="Description (optional)"
-            className="text-sm bg-transparent border-b border-transparent hover:border-deadman-border focus:border-deadman-cyan outline-none text-deadman-muted placeholder-deadman-muted/50 transition-colors w-full"
+            className="text-sm bg-transparent border-b border-transparent hover:border-pulseops-border focus:border-pulseops-cyan outline-none text-pulseops-muted placeholder-pulseops-muted/50 transition-colors w-full"
           />
         </div>
 
         <div className="flex items-center gap-2">
-          <label className="flex items-center gap-2 text-xs text-deadman-muted cursor-pointer">
+          <label className="flex items-center gap-2 text-xs text-pulseops-muted cursor-pointer">
             <button
               onClick={() => setRunbook((prev) => ({ ...prev, dry_run_mode: !prev.dry_run_mode }))}
               className={`p-1 rounded-lg transition-colors ${
                 runbook.dry_run_mode
-                  ? 'text-deadman-warning bg-deadman-warning/10'
-                  : 'text-deadman-muted hover:bg-deadman-border'
+                  ? 'text-pulseops-warning bg-pulseops-warning/10'
+                  : 'text-pulseops-muted hover:bg-pulseops-border'
               }`}
             >
               {runbook.dry_run_mode ? <ToggleRight size={18} /> : <ToggleLeft size={18} />}
@@ -164,17 +164,17 @@ export default function RunbookEditorPage() {
             Dry-Run
           </label>
 
-          <motion.button onClick={handleDuplicate} className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium text-deadman-muted border border-deadman-border rounded-lg hover:text-deadman-text hover:bg-deadman-border/50 transition-all" whileHover={{ scale: 1.02 }}>
+          <motion.button onClick={handleDuplicate} className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium text-pulseops-muted border border-pulseops-border rounded-lg hover:text-pulseops-text hover:bg-pulseops-border/50 transition-all" whileHover={{ scale: 1.02 }}>
             <Copy size={12} />
             Duplicate
           </motion.button>
 
-          <motion.button onClick={handleTest} className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium text-deadman-warning bg-deadman-warning/10 border border-deadman-warning/20 rounded-lg hover:bg-deadman-warning/20 transition-all" whileHover={{ scale: 1.02 }}>
+          <motion.button onClick={handleTest} className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium text-pulseops-warning bg-pulseops-warning/10 border border-pulseops-warning/20 rounded-lg hover:bg-pulseops-warning/20 transition-all" whileHover={{ scale: 1.02 }}>
             <Play size={12} />
             Test Run
           </motion.button>
 
-          <motion.button onClick={handleSave} disabled={saving} className="flex items-center gap-1.5 px-4 py-1.5 text-xs font-medium text-deadman-bg bg-deadman-cyan rounded-lg hover:bg-deadman-cyan/90 disabled:opacity-50 transition-all" whileHover={{ scale: 1.02 }}>
+          <motion.button onClick={handleSave} disabled={saving} className="flex items-center gap-1.5 px-4 py-1.5 text-xs font-medium text-pulseops-bg bg-pulseops-cyan rounded-lg hover:bg-pulseops-cyan/90 disabled:opacity-50 transition-all" whileHover={{ scale: 1.02 }}>
             {saving ? <Loader2 size={12} className="animate-spin" /> : <Save size={12} />}
             {saving ? 'Saving...' : 'Save'}
           </motion.button>

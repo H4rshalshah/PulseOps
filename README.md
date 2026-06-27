@@ -1,14 +1,14 @@
-# DeadMan ⚡ — Automated Incident Response System
+# PulseOps ⚡ — Automated Incident Response System
 
-> *"Production fires don't wait. Neither does DeadMan."*
+> *"Production fires don't wait. Neither does PulseOps."*
 
-DeadMan is a production-grade, full-stack Automated Incident Response System designed for engineers who deal with real incidents at 2 AM. Think NASA mission control crossed with a Bloomberg terminal — powerful, precise, and trustworthy.
+PulseOps is a production-grade, full-stack Automated Incident Response System designed for engineers who deal with real incidents at 2 AM. Think NASA mission control crossed with a Bloomberg terminal — powerful, precise, and trustworthy.
 
 ---
 
 ## 🚀 Live Demo
 
-**[deadman.onrender.com](https://deadman.onrender.com)** — Deploy your own in minutes!
+**[pulseops.onrender.com](https://pulseops.onrender.com)** — Deploy your own in minutes!
 
 ---
 
@@ -186,7 +186,7 @@ Designed for software engineering interviews at top-tier companies.
 ## 📂 Project Structure
 
 ```
-deadman/
+pulseops/
 ├── frontend/                  # Next.js 14 App Router
 │   ├── app/                   # Pages (dashboard, incidents, runbooks, analytics, settings, landing)
 │   ├── components/            # React components
@@ -297,7 +297,7 @@ deadman/
 **Backend** (`backend/.env`):
 ```env
 PORT=3001
-MONGO_URI=mongodb://localhost:27017/deadman
+MONGO_URI=mongodb://localhost:27017/pulseops
 REDIS_URL=redis://localhost:6379
 CORS_ORIGIN=http://localhost:3000
 SLACK_WEBHOOK_URL=

@@ -1,4 +1,4 @@
-# DeadMan Backend — Render Deployment Config
+# PulseOps Backend — Render Deployment Config
 # https://dashboard.render.com
 #
 # 1. Create a new Web Service on Render
@@ -8,7 +8,7 @@
 
 services:
   - type: web
-    name: deadman-backend
+    name: pulseops-backend
     env: node
     buildCommand: npm install && npm run build
     startCommand: npm start
@@ -20,7 +20,7 @@ services:
 
       # ── Database (MongoDB Atlas) ──────────────────────────
       - key: MONGO_URI
-        sync: false  # Set manually: mongodb+srv://user:pass@cluster.mongodb.net/deadman?retryWrites=true&w=majority
+        sync: false  # Set manually: mongodb+srv://user:pass@cluster.mongodb.net/pulseops?retryWrites=true&w=majority
 
       # ── Redis (for BullMQ—optional in MVP) ────────────────
       - key: REDIS_URL
@@ -36,9 +36,9 @@ services:
 
       # ── URLs ──────────────────────────────────────────────
       - key: FRONTEND_URL
-        value: https://deadman-inky.vercel.app  # ← CHANGE to your Vercel frontend URL
+        value: https://pulseops-inky.vercel.app  # ← CHANGE to your Vercel frontend URL
       - key: BACKEND_URL
-        value: https://deadman-backend.onrender.com  # ← CHANGE to your Render backend URL
+        value: https://pulseops-backend.onrender.com  # ← CHANGE to your Render backend URL
 
       # ── OAuth: Google ─────────────────────────────────────
       - key: GOOGLE_CLIENT_ID
@@ -46,7 +46,7 @@ services:
       - key: GOOGLE_CLIENT_SECRET
         sync: false
       - key: GOOGLE_CALLBACK_URL
-        value: https://deadman-backend.onrender.com/api/auth/google/callback  # ← CHANGE to match production
+        value: https://pulseops-backend.onrender.com/api/auth/google/callback  # ← CHANGE to match production
 
       # ── OAuth: GitHub ─────────────────────────────────────
       - key: GITHUB_CLIENT_ID
@@ -54,7 +54,7 @@ services:
       - key: GITHUB_CLIENT_SECRET
         sync: false
       - key: GITHUB_CALLBACK_URL
-        value: https://deadman-backend.onrender.com/api/auth/github/callback  # ← CHANGE to match production
+        value: https://pulseops-backend.onrender.com/api/auth/github/callback  # ← CHANGE to match production
 
       # ── Email (for password reset) ────────────────────────
       - key: EMAIL_HOST
@@ -64,7 +64,7 @@ services:
       - key: EMAIL_PASS
         sync: false
       - key: EMAIL_FROM
-        value: noreply@deadman.dev
+        value: noreply@pulseops.dev
 
       # ── Notifications ─────────────────────────────────────
       - key: SLACK_WEBHOOK_URL

@@ -42,7 +42,7 @@ export default function ForgotPasswordPage() {
   };
 
   return (
-    <div className="min-h-screen bg-deadman-bg flex items-center justify-center px-4">
+    <div className="min-h-screen bg-pulseops-bg flex items-center justify-center px-4">
       <div className="absolute inset-0 opacity-[0.03]" style={{ backgroundImage: 'linear-gradient(#7EC8E3 1px, transparent 1px), linear-gradient(90deg, #7EC8E3 1px, transparent 1px)', backgroundSize: '40px 40px' }} />
       
       <motion.div
@@ -54,41 +54,41 @@ export default function ForgotPasswordPage() {
           <div className="flex justify-center mb-4">
             <Logo size={48} />
           </div>
-          <h1 className="text-2xl font-heading font-bold text-deadman-text">Reset password</h1>
-          <p className="text-sm text-deadman-muted mt-1">Enter your email to receive a reset link</p>
+          <h1 className="text-2xl font-heading font-bold text-pulseops-text">Reset password</h1>
+          <p className="text-sm text-pulseops-muted mt-1">Enter your email to receive a reset link</p>
         </div>
 
-        <div className="bg-deadman-surface border border-deadman-border rounded-2xl p-6">
+        <div className="bg-pulseops-surface border border-pulseops-border rounded-2xl p-6">
           {sent ? (
             <div className="text-center py-4">
-              <div className="w-12 h-12 mx-auto mb-4 bg-deadman-success/10 rounded-full flex items-center justify-center">
-                <CheckCircle size={24} className="text-deadman-success" />
+              <div className="w-12 h-12 mx-auto mb-4 bg-pulseops-success/10 rounded-full flex items-center justify-center">
+                <CheckCircle size={24} className="text-pulseops-success" />
               </div>
-              <p className="text-sm text-deadman-text mb-1">Check your email</p>
-              <p className="text-xs text-deadman-muted">
+              <p className="text-sm text-pulseops-text mb-1">Check your email</p>
+              <p className="text-xs text-pulseops-muted">
                 If an account exists for {email}, we&apos;ve sent a password reset link.
               </p>
               
               {/* Dev mode reset link */}
               {devLink && (
-                <div className="mt-4 p-3 bg-deadman-cyan/10 border border-deadman-cyan/20 rounded-xl">
-                  <p className="text-[10px] text-deadman-cyan font-medium uppercase tracking-wider mb-2">
+                <div className="mt-4 p-3 bg-pulseops-cyan/10 border border-pulseops-cyan/20 rounded-xl">
+                  <p className="text-[10px] text-pulseops-cyan font-medium uppercase tracking-wider mb-2">
                     🔧 Development Mode — Reset Link
                   </p>
                   <div className="flex items-center gap-2">
-                    <code className="flex-1 text-xs text-deadman-cyan font-mono truncate bg-deadman-bg px-2 py-1.5 rounded-lg">
+                    <code className="flex-1 text-xs text-pulseops-cyan font-mono truncate bg-pulseops-bg px-2 py-1.5 rounded-lg">
                       {devLink}
                     </code>
                     <button
                       onClick={() => copyToClipboard(devLink)}
-                      className="p-1.5 text-deadman-cyan hover:bg-deadman-cyan/20 rounded-lg transition-colors shrink-0"
+                      className="p-1.5 text-pulseops-cyan hover:bg-pulseops-cyan/20 rounded-lg transition-colors shrink-0"
                       title="Copy link"
                     >
                       <Copy size={14} />
                     </button>
                     <a
                       href={devLink}
-                      className="p-1.5 text-deadman-cyan hover:bg-deadman-cyan/20 rounded-lg transition-colors shrink-0"
+                      className="p-1.5 text-pulseops-cyan hover:bg-pulseops-cyan/20 rounded-lg transition-colors shrink-0"
                       title="Open reset link"
                     >
                       <ExternalLink size={14} />
@@ -97,22 +97,22 @@ export default function ForgotPasswordPage() {
                 </div>
               )}
               
-              <Link href="/auth/login" className="inline-flex items-center gap-1 mt-4 text-sm text-deadman-cyan hover:text-deadman-cyan/80 transition-colors">
+              <Link href="/auth/login" className="inline-flex items-center gap-1 mt-4 text-sm text-pulseops-cyan hover:text-pulseops-cyan/80 transition-colors">
                 <ArrowLeft size={14} /> Back to login
               </Link>
             </div>
           ) : (
             <form onSubmit={handleSubmit} className="space-y-4">
               <div>
-                <label className="block text-sm font-medium text-deadman-text mb-1.5">Email</label>
+                <label className="block text-sm font-medium text-pulseops-text mb-1.5">Email</label>
                 <div className="relative">
-                  <Mail size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-deadman-muted" />
+                  <Mail size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-pulseops-muted" />
                   <input
                     type="email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder="you@company.com"
-                    className="w-full bg-deadman-bg border border-deadman-border rounded-xl pl-10 pr-4 py-2.5 text-sm text-deadman-text placeholder-deadman-muted/50 outline-none focus:border-deadman-cyan/50 transition-colors"
+                    className="w-full bg-pulseops-bg border border-pulseops-border rounded-xl pl-10 pr-4 py-2.5 text-sm text-pulseops-text placeholder-pulseops-muted/50 outline-none focus:border-pulseops-cyan/50 transition-colors"
                     required
                   />
                 </div>
@@ -120,7 +120,7 @@ export default function ForgotPasswordPage() {
               <button
                 type="submit"
                 disabled={loading}
-                className="w-full py-2.5 bg-deadman-cyan text-deadman-bg font-medium rounded-xl hover:bg-deadman-cyan/90 disabled:opacity-50 transition-all flex items-center justify-center gap-2"
+                className="w-full py-2.5 bg-pulseops-cyan text-pulseops-bg font-medium rounded-xl hover:bg-pulseops-cyan/90 disabled:opacity-50 transition-all flex items-center justify-center gap-2"
               >
                 {loading ? <Loader2 size={16} className="animate-spin" /> : null}
                 {loading ? 'Sending...' : 'Send Reset Link'}
@@ -129,8 +129,8 @@ export default function ForgotPasswordPage() {
           )}
         </div>
 
-        <p className="text-center mt-6 text-sm text-deadman-muted">
-          <Link href="/auth/login" className="inline-flex items-center gap-1 text-deadman-cyan hover:text-deadman-cyan/80 transition-colors">
+        <p className="text-center mt-6 text-sm text-pulseops-muted">
+          <Link href="/auth/login" className="inline-flex items-center gap-1 text-pulseops-cyan hover:text-pulseops-cyan/80 transition-colors">
             <ArrowLeft size={14} /> Back to login
           </Link>
         </p>

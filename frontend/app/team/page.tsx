@@ -12,10 +12,10 @@ import {
 import type { WorkspaceMember, Invite } from '@/lib/types';
 
 const roleColors: Record<string, string> = {
-  owner: 'text-deadman-warning bg-deadman-warning/10',
-  admin: 'text-deadman-cyan bg-deadman-cyan/10',
-  engineer: 'text-deadman-success bg-deadman-success/10',
-  viewer: 'text-deadman-muted bg-deadman-border/50',
+  owner: 'text-pulseops-warning bg-pulseops-warning/10',
+  admin: 'text-pulseops-cyan bg-pulseops-cyan/10',
+  engineer: 'text-pulseops-success bg-pulseops-success/10',
+  viewer: 'text-pulseops-muted bg-pulseops-border/50',
 };
 
 const roleBadgeLabels: Record<string, string> = {
@@ -111,7 +111,7 @@ export default function TeamPage() {
   if (loading) {
     return (
       <div className="flex items-center justify-center py-24">
-        <Loader2 size={24} className="text-deadman-cyan animate-spin" />
+        <Loader2 size={24} className="text-pulseops-cyan animate-spin" />
       </div>
     );
   }
@@ -119,9 +119,9 @@ export default function TeamPage() {
   if (!workspace) {
     return (
       <div className="text-center py-24">
-        <AlertTriangle size={48} className="mx-auto mb-4 text-deadman-warning" />
-        <h2 className="text-xl font-heading font-bold text-deadman-text mb-2">No Workspace Found</h2>
-        <p className="text-sm text-deadman-muted">Create a workspace to manage your team.</p>
+        <AlertTriangle size={48} className="mx-auto mb-4 text-pulseops-warning" />
+        <h2 className="text-xl font-heading font-bold text-pulseops-text mb-2">No Workspace Found</h2>
+        <p className="text-sm text-pulseops-muted">Create a workspace to manage your team.</p>
       </div>
     );
   }
@@ -129,31 +129,31 @@ export default function TeamPage() {
   return (
     <div className="space-y-8">
       <div>
-        <h1 className="text-2xl font-heading font-bold text-deadman-text">Team</h1>
-        <p className="text-sm text-deadman-muted mt-1">{workspace.name} — {members.length} members</p>
+        <h1 className="text-2xl font-heading font-bold text-pulseops-text">Team</h1>
+        <p className="text-sm text-pulseops-muted mt-1">{workspace.name} — {members.length} members</p>
       </div>
 
       {/* Invite Members */}
-      <div className="bg-deadman-surface border border-deadman-border rounded-xl p-5">
-        <h3 className="text-sm font-medium text-deadman-text mb-4 flex items-center gap-2">
-          <UserPlus size={16} className="text-deadman-cyan" />
+      <div className="bg-pulseops-surface border border-pulseops-border rounded-xl p-5">
+        <h3 className="text-sm font-medium text-pulseops-text mb-4 flex items-center gap-2">
+          <UserPlus size={16} className="text-pulseops-cyan" />
           Invite Members
         </h3>
         <div className="flex flex-wrap gap-3">
           <div className="relative flex-1 min-w-[200px]">
-            <Mail size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-deadman-muted" />
+            <Mail size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-pulseops-muted" />
             <input
               type="email"
               value={inviteEmail}
               onChange={(e) => setInviteEmail(e.target.value)}
               placeholder="colleague@company.com"
-              className="w-full bg-deadman-bg border border-deadman-border rounded-lg pl-10 pr-4 py-2 text-sm text-deadman-text placeholder-deadman-muted/50 outline-none focus:border-deadman-cyan/50 transition-colors"
+              className="w-full bg-pulseops-bg border border-pulseops-border rounded-lg pl-10 pr-4 py-2 text-sm text-pulseops-text placeholder-pulseops-muted/50 outline-none focus:border-pulseops-cyan/50 transition-colors"
             />
           </div>
           <select
             value={inviteRole}
             onChange={(e) => setInviteRole(e.target.value)}
-            className="bg-deadman-bg border border-deadman-border rounded-lg px-3 py-2 text-sm text-deadman-text outline-none focus:border-deadman-cyan/50 transition-colors"
+            className="bg-pulseops-bg border border-pulseops-border rounded-lg px-3 py-2 text-sm text-pulseops-text outline-none focus:border-pulseops-cyan/50 transition-colors"
           >
             <option value="admin">Admin</option>
             <option value="engineer">Engineer</option>
@@ -162,7 +162,7 @@ export default function TeamPage() {
           <button
             onClick={handleInvite}
             disabled={inviting || !inviteEmail}
-            className="flex items-center gap-1.5 px-4 py-2 bg-deadman-cyan text-deadman-bg font-medium rounded-lg hover:bg-deadman-cyan/90 disabled:opacity-50 transition-all text-sm"
+            className="flex items-center gap-1.5 px-4 py-2 bg-pulseops-cyan text-pulseops-bg font-medium rounded-lg hover:bg-pulseops-cyan/90 disabled:opacity-50 transition-all text-sm"
           >
             {inviting ? <Loader2 size={14} className="animate-spin" /> : <UserPlus size={14} />}
             Send Invite
@@ -172,28 +172,28 @@ export default function TeamPage() {
 
       {/* Pending Invites */}
       {invites.length > 0 && (
-        <div className="bg-deadman-surface border border-deadman-border rounded-xl p-5">
-          <h3 className="text-sm font-medium text-deadman-text mb-4 flex items-center gap-2">
-            <Mail size={16} className="text-deadman-warning" />
+        <div className="bg-pulseops-surface border border-pulseops-border rounded-xl p-5">
+          <h3 className="text-sm font-medium text-pulseops-text mb-4 flex items-center gap-2">
+            <Mail size={16} className="text-pulseops-warning" />
             Pending Invites ({invites.length})
           </h3>
           <div className="space-y-2">
             {invites.map((invite) => (
-              <div key={invite.id} className="flex items-center justify-between py-2 px-3 rounded-lg bg-deadman-bg/50">
+              <div key={invite.id} className="flex items-center justify-between py-2 px-3 rounded-lg bg-pulseops-bg/50">
                 <div className="flex items-center gap-3">
-                  <Mail size={14} className="text-deadman-muted" />
-                  <span className="text-sm text-deadman-text">{invite.email}</span>
+                  <Mail size={14} className="text-pulseops-muted" />
+                  <span className="text-sm text-pulseops-text">{invite.email}</span>
                   <span className={`text-[10px] font-medium px-1.5 py-0.5 rounded-full ${roleColors[invite.role]}`}>
                     {roleBadgeLabels[invite.role]}
                   </span>
                 </div>
                 <div className="flex items-center gap-3">
-                  <span className="text-xs text-deadman-muted">
+                  <span className="text-xs text-pulseops-muted">
                     Expires {formatDistanceToNow(new Date(invite.expiresAt), { addSuffix: true })}
                   </span>
                   <button
                     onClick={() => handleRevokeInvite(invite.id)}
-                    className="p-1 text-deadman-muted hover:text-deadman-danger transition-colors"
+                    className="p-1 text-pulseops-muted hover:text-pulseops-danger transition-colors"
                   >
                     <XCircle size={14} />
                   </button>
@@ -205,31 +205,31 @@ export default function TeamPage() {
       )}
 
       {/* Members List */}
-      <div className="bg-deadman-surface border border-deadman-border rounded-xl overflow-hidden">
-        <div className="px-5 py-4 border-b border-deadman-border">
-          <h3 className="text-sm font-medium text-deadman-text flex items-center gap-2">
-            <Users size={16} className="text-deadman-cyan" />
+      <div className="bg-pulseops-surface border border-pulseops-border rounded-xl overflow-hidden">
+        <div className="px-5 py-4 border-b border-pulseops-border">
+          <h3 className="text-sm font-medium text-pulseops-text flex items-center gap-2">
+            <Users size={16} className="text-pulseops-cyan" />
             Team Members ({members.length})
           </h3>
         </div>
-        <div className="divide-y divide-deadman-border">
+        <div className="divide-y divide-pulseops-border">
           {members.length === 0 ? (
             <div className="text-center py-12">
-              <Users size={32} className="mx-auto mb-2 text-deadman-muted" />
-              <p className="text-sm text-deadman-muted">No members yet</p>
+              <Users size={32} className="mx-auto mb-2 text-pulseops-muted" />
+              <p className="text-sm text-pulseops-muted">No members yet</p>
             </div>
           ) : (
             members.map((member) => (
-              <div key={member.id} className="flex items-center justify-between px-5 py-3 hover:bg-deadman-cyan/5 transition-colors">
+              <div key={member.id} className="flex items-center justify-between px-5 py-3 hover:bg-pulseops-cyan/5 transition-colors">
                 <div className="flex items-center gap-3">
-                  <div className="w-8 h-8 rounded-full bg-deadman-cyan/20 flex items-center justify-center">
-                    <span className="text-xs font-mono font-bold text-deadman-cyan">
+                  <div className="w-8 h-8 rounded-full bg-pulseops-cyan/20 flex items-center justify-center">
+                    <span className="text-xs font-mono font-bold text-pulseops-cyan">
                       {member.user?.name?.charAt(0)?.toUpperCase() || '?'}
                     </span>
                   </div>
                   <div>
-                    <p className="text-sm font-medium text-deadman-text">{member.user?.name || 'Unknown'}</p>
-                    <p className="text-xs text-deadman-muted">{member.user?.email}</p>
+                    <p className="text-sm font-medium text-pulseops-text">{member.user?.name || 'Unknown'}</p>
+                    <p className="text-xs text-pulseops-muted">{member.user?.email}</p>
                   </div>
                 </div>
                 <div className="flex items-center gap-3">
@@ -241,7 +241,7 @@ export default function TeamPage() {
                     <select
                       value={member.role}
                       onChange={(e) => handleChangeRole(member.id, e.target.value)}
-                      className="bg-deadman-bg border border-deadman-border rounded-lg px-2 py-1 text-xs text-deadman-text outline-none focus:border-deadman-cyan/50 transition-colors"
+                      className="bg-pulseops-bg border border-pulseops-border rounded-lg px-2 py-1 text-xs text-pulseops-text outline-none focus:border-pulseops-cyan/50 transition-colors"
                     >
                       <option value="admin">Admin</option>
                       <option value="engineer">Engineer</option>
@@ -254,13 +254,13 @@ export default function TeamPage() {
                         <div className="flex items-center gap-1">
                           <button
                             onClick={() => handleRemoveMember(member.id)}
-                            className="p-1 text-deadman-danger hover:bg-deadman-danger/10 rounded transition-colors"
+                            className="p-1 text-pulseops-danger hover:bg-pulseops-danger/10 rounded transition-colors"
                           >
                             <CheckCircle size={14} />
                           </button>
                           <button
                             onClick={() => setConfirmDelete(null)}
-                            className="p-1 text-deadman-muted hover:bg-deadman-border rounded transition-colors"
+                            className="p-1 text-pulseops-muted hover:bg-pulseops-border rounded transition-colors"
                           >
                             <XCircle size={14} />
                           </button>
@@ -268,7 +268,7 @@ export default function TeamPage() {
                       ) : (
                         <button
                           onClick={() => setConfirmDelete(member.id)}
-                          className="p-1 text-deadman-muted hover:text-deadman-danger transition-colors"
+                          className="p-1 text-pulseops-muted hover:text-pulseops-danger transition-colors"
                         >
                           <Trash2 size={14} />
                         </button>

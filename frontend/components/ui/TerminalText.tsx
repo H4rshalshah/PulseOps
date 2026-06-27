@@ -50,7 +50,7 @@ export default function TerminalText({
       <span>{displayedText}</span>
       {showCursor && (
         <motion.span
-          className="inline-block w-[2px] h-[1em] bg-deadman-cyan ml-[1px] align-middle"
+          className="inline-block w-[2px] h-[1em] bg-pulseops-cyan ml-[1px] align-middle"
           animate={{ opacity: [1, 0] }}
           transition={{ duration: 0.8, repeat: Infinity, repeatType: 'reverse' }}
         />

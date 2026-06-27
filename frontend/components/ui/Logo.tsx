@@ -37,7 +37,7 @@ export default function Logo({ size = 32, critical = false, animated = true }: L
         viewBox="0 0 40 40"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
-        className={`transition-colors duration-300 ${critical ? 'text-deadman-danger' : 'text-deadman-cyan'}`}
+        className={`transition-colors duration-300 ${critical ? 'text-pulseops-danger' : 'text-pulseops-cyan'}`}
       >
         {/* Flatline to pulse EKG */}
         <motion.path
@@ -70,16 +70,16 @@ export default function Logo({ size = 32, critical = false, animated = true }: L
       {/* Glow effect on hover */}
       {critical && (
         <motion.div
-          className="absolute inset-0 rounded-full bg-deadman-danger/20 blur-md"
+          className="absolute inset-0 rounded-full bg-pulseops-danger/20 blur-md"
           animate={{ scale: [1, 1.2, 1], opacity: [0.3, 0.6, 0.3] }}
           transition={{ duration: 2, repeat: Infinity }}
         />
       )}
 
       <span className={`font-heading font-bold text-lg ${
-        critical ? 'text-deadman-danger' : 'text-deadman-cyan'
+        critical ? 'text-pulseops-danger' : 'text-pulseops-cyan'
       }`}>
-        DeadMan
+        PulseOps
       </span>
     </motion.button>
   );

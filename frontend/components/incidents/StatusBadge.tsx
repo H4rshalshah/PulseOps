@@ -10,10 +10,10 @@ interface StatusBadgeProps {
 }
 
 const statusConfig = {
-  open: { label: 'Open', color: 'bg-deadman-danger/10 text-deadman-danger border-deadman-danger/20' },
-  investigating: { label: 'Investigating', color: 'bg-deadman-warning/10 text-deadman-warning border-deadman-warning/20' },
-  mitigating: { label: 'Mitigating', color: 'bg-deadman-cyan/10 text-deadman-cyan border-deadman-cyan/20' },
-  resolved: { label: 'Resolved', color: 'bg-deadman-success/10 text-deadman-success border-deadman-success/20' },
+  open: { label: 'Open', color: 'bg-pulseops-danger/10 text-pulseops-danger border-pulseops-danger/20' },
+  investigating: { label: 'Investigating', color: 'bg-pulseops-warning/10 text-pulseops-warning border-pulseops-warning/20' },
+  mitigating: { label: 'Mitigating', color: 'bg-pulseops-cyan/10 text-pulseops-cyan border-pulseops-cyan/20' },
+  resolved: { label: 'Resolved', color: 'bg-pulseops-success/10 text-pulseops-success border-pulseops-success/20' },
 };
 
 function StatusBadgeComponent({ status, size = 'sm' }: StatusBadgeProps) {

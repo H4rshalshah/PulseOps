@@ -52,7 +52,7 @@ export default function RunbooksPage() {
   if (loading) {
     return (
       <div className="flex items-center justify-center py-24">
-        <Loader2 size={24} className="text-deadman-cyan animate-spin" />
+        <Loader2 size={24} className="text-pulseops-cyan animate-spin" />
       </div>
     );
   }
@@ -62,12 +62,12 @@ export default function RunbooksPage() {
       {/* Header */}
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-heading font-bold text-deadman-text">Runbooks</h1>
-          <p className="text-sm text-deadman-muted mt-1">{runbooks.length} runbooks configured</p>
+          <h1 className="text-2xl font-heading font-bold text-pulseops-text">Runbooks</h1>
+          <p className="text-sm text-pulseops-muted mt-1">{runbooks.length} runbooks configured</p>
         </div>
         <Link
           href="/runbooks/new"
-          className="flex items-center gap-2 px-4 py-2 bg-deadman-cyan text-deadman-bg font-medium rounded-xl hover:bg-deadman-cyan/90 transition-all"
+          className="flex items-center gap-2 px-4 py-2 bg-pulseops-cyan text-pulseops-bg font-medium rounded-xl hover:bg-pulseops-cyan/90 transition-all"
         >
           <Plus size={16} />
           New Runbook
@@ -75,13 +75,13 @@ export default function RunbooksPage() {
       </div>
 
       {runbooks.length === 0 ? (
-        <div className="text-center py-16 border border-dashed border-deadman-border rounded-xl">
-          <BookOpen size={40} className="mx-auto mb-3 text-deadman-muted" />
-          <h3 className="text-lg font-medium text-deadman-text mb-1">No runbooks yet</h3>
-          <p className="text-sm text-deadman-muted mb-4">Create your first automated runbook</p>
+        <div className="text-center py-16 border border-dashed border-pulseops-border rounded-xl">
+          <BookOpen size={40} className="mx-auto mb-3 text-pulseops-muted" />
+          <h3 className="text-lg font-medium text-pulseops-text mb-1">No runbooks yet</h3>
+          <p className="text-sm text-pulseops-muted mb-4">Create your first automated runbook</p>
           <Link
             href="/runbooks/new"
-            className="inline-flex items-center gap-2 px-4 py-2 bg-deadman-cyan text-deadman-bg font-medium rounded-xl hover:bg-deadman-cyan/90 transition-all"
+            className="inline-flex items-center gap-2 px-4 py-2 bg-pulseops-cyan text-pulseops-bg font-medium rounded-xl hover:bg-pulseops-cyan/90 transition-all"
           >
             <Plus size={16} />
             Create Runbook
@@ -95,11 +95,11 @@ export default function RunbooksPage() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: i * 0.05 }}
-              className="bg-deadman-surface border border-deadman-border rounded-xl p-5 hover:border-deadman-cyan/20 transition-all group"
+              className="bg-pulseops-surface border border-pulseops-border rounded-xl p-5 hover:border-pulseops-cyan/20 transition-all group"
             >
               <div className="flex items-start justify-between mb-3">
                 <Link href={`/runbooks/${runbook.id}`} className="flex-1 min-w-0">
-                  <h3 className="font-heading font-semibold text-deadman-text group-hover:text-deadman-cyan transition-colors truncate">
+                  <h3 className="font-heading font-semibold text-pulseops-text group-hover:text-pulseops-cyan transition-colors truncate">
                     {runbook.name}
                   </h3>
                 </Link>
@@ -107,8 +107,8 @@ export default function RunbooksPage() {
                   onClick={() => toggleActive(runbook)}
                   className={`ml-2 p-1.5 rounded-lg transition-colors ${
                     runbook.is_active
-                      ? 'text-deadman-success hover:bg-deadman-success/10'
-                      : 'text-deadman-muted hover:bg-deadman-border'
+                      ? 'text-pulseops-success hover:bg-pulseops-success/10'
+                      : 'text-pulseops-muted hover:bg-pulseops-border'
                   }`}
                   title={runbook.is_active ? 'Deactivate' : 'Activate'}
                 >
@@ -117,11 +117,11 @@ export default function RunbooksPage() {
               </div>
 
               {runbook.description && (
-                <p className="text-sm text-deadman-muted mb-3 line-clamp-2">{runbook.description}</p>
+                <p className="text-sm text-pulseops-muted mb-3 line-clamp-2">{runbook.description}</p>
               )}
 
               <div className="flex items-center justify-between">
-                <div className="flex items-center gap-3 text-xs text-deadman-muted">
+                <div className="flex items-center gap-3 text-xs text-pulseops-muted">
                   <span className="flex items-center gap-1">
                     <span className="font-mono">{runbook.steps?.length || 0}</span> steps
                   </span>
@@ -131,12 +131,12 @@ export default function RunbooksPage() {
 
                 <div className="flex items-center gap-1">
                   {runbook.dry_run_mode && (
-                    <span className="text-[10px] font-medium px-1.5 py-0.5 rounded bg-deadman-warning/10 text-deadman-warning">
+                    <span className="text-[10px] font-medium px-1.5 py-0.5 rounded bg-pulseops-warning/10 text-pulseops-warning">
                       Dry-Run
                     </span>
                   )}
                   {!runbook.is_active && (
-                    <span className="text-[10px] font-medium px-1.5 py-0.5 rounded bg-deadman-muted/10 text-deadman-muted">
+                    <span className="text-[10px] font-medium px-1.5 py-0.5 rounded bg-pulseops-muted/10 text-pulseops-muted">
                       Inactive
                     </span>
                   )}
@@ -145,10 +145,10 @@ export default function RunbooksPage() {
 
               {/* Trigger conditions */}
               {runbook.trigger_conditions && Object.keys(runbook.trigger_conditions).length > 0 && (
-                <div className="mt-3 pt-3 border-t border-deadman-border">
+                <div className="mt-3 pt-3 border-t border-pulseops-border">
                   <div className="flex flex-wrap gap-1.5">
                     {Object.entries(runbook.trigger_conditions).map(([key, value]) => (
-                      <span key={key} className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-deadman-cyan/10 text-deadman-cyan">
+                      <span key={key} className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-pulseops-cyan/10 text-pulseops-cyan">
                         {key}: {String(value)}
                       </span>
                     ))}
@@ -157,16 +157,16 @@ export default function RunbooksPage() {
               )}
 
               {/* Actions */}
-              <div className="flex items-center gap-2 mt-3 pt-3 border-t border-deadman-border">
+              <div className="flex items-center gap-2 mt-3 pt-3 border-t border-pulseops-border">
                 <Link
                   href={`/runbooks/${runbook.id}`}
-                  className="flex-1 text-center text-xs font-medium text-deadman-cyan bg-deadman-cyan/10 py-1.5 rounded-lg hover:bg-deadman-cyan/20 transition-colors"
+                  className="flex-1 text-center text-xs font-medium text-pulseops-cyan bg-pulseops-cyan/10 py-1.5 rounded-lg hover:bg-pulseops-cyan/20 transition-colors"
                 >
                   Edit
                 </Link>
                 <button
                   onClick={() => handleDelete(runbook.id)}
-                  className="px-3 py-1.5 text-xs font-medium text-deadman-danger bg-deadman-danger/10 rounded-lg hover:bg-deadman-danger/20 transition-colors"
+                  className="px-3 py-1.5 text-xs font-medium text-pulseops-danger bg-pulseops-danger/10 rounded-lg hover:bg-pulseops-danger/20 transition-colors"
                 >
                   <Trash2 size={12} />
                 </button>

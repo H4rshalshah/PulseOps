@@ -154,7 +154,7 @@ export default function RunbookBuilder({ initialSteps, onSave }: RunbookBuilderP
     <div className="flex gap-4 h-[600px]">
       {/* Toolbar */}
       <div className="w-48 space-y-2">
-        <p className="text-xs font-medium text-deadman-muted uppercase tracking-wider mb-3">Step Types</p>
+        <p className="text-xs font-medium text-pulseops-muted uppercase tracking-wider mb-3">Step Types</p>
         {stepTypes.map((step) => {
           const Icon = step.icon;
           return (
@@ -165,18 +165,18 @@ export default function RunbookBuilder({ initialSteps, onSave }: RunbookBuilderP
                 e.dataTransfer.setData('application/reactflow', step.type);
                 e.dataTransfer.effectAllowed = 'move';
               }}
-              className="flex items-center gap-2 px-3 py-2 bg-deadman-surface border border-deadman-border rounded-lg cursor-grab active:cursor-grabbing hover:border-deadman-cyan/30 transition-all hover:scale-[1.02] active:scale-[0.98]"
+              className="flex items-center gap-2 px-3 py-2 bg-pulseops-surface border border-pulseops-border rounded-lg cursor-grab active:cursor-grabbing hover:border-pulseops-cyan/30 transition-all hover:scale-[1.02] active:scale-[0.98]"
             >
               <Icon size={14} color={step.color} />
-              <span className="text-xs text-deadman-text">{step.label}</span>
+              <span className="text-xs text-pulseops-text">{step.label}</span>
             </div>
           );
         })}
 
-        <div className="border-t border-deadman-border pt-3 mt-4 space-y-2">
+        <div className="border-t border-pulseops-border pt-3 mt-4 space-y-2">
           <motion.button
             onClick={autoLayout}
-            className="flex items-center gap-2 w-full px-3 py-2 bg-deadman-cyan/10 text-deadman-cyan rounded-lg text-xs hover:bg-deadman-cyan/20 transition-colors"
+            className="flex items-center gap-2 w-full px-3 py-2 bg-pulseops-cyan/10 text-pulseops-cyan rounded-lg text-xs hover:bg-pulseops-cyan/20 transition-colors"
             whileHover={{ scale: 1.02 }}
           >
             <Sparkles size={12} />
@@ -185,7 +185,7 @@ export default function RunbookBuilder({ initialSteps, onSave }: RunbookBuilderP
           {selectedNode && (
             <motion.button
               onClick={deleteSelected}
-              className="flex items-center gap-2 w-full px-3 py-2 bg-deadman-danger/10 text-deadman-danger rounded-lg text-xs hover:bg-deadman-danger/20 transition-colors"
+              className="flex items-center gap-2 w-full px-3 py-2 bg-pulseops-danger/10 text-pulseops-danger rounded-lg text-xs hover:bg-pulseops-danger/20 transition-colors"
               whileHover={{ scale: 1.02 }}
             >
               <Trash2 size={12} />
@@ -196,7 +196,7 @@ export default function RunbookBuilder({ initialSteps, onSave }: RunbookBuilderP
       </div>
 
       {/* Flow Canvas */}
-      <div className="flex-1 bg-deadman-bg border border-deadman-border rounded-xl overflow-hidden" ref={reactFlowWrapper}>
+      <div className="flex-1 bg-pulseops-bg border border-pulseops-border rounded-xl overflow-hidden" ref={reactFlowWrapper}>
         <ReactFlow
           nodes={nodes}
           edges={edges}
@@ -214,7 +214,7 @@ export default function RunbookBuilder({ initialSteps, onSave }: RunbookBuilderP
           }}
         >
           <Controls
-            className="!bg-deadman-surface !border-deadman-border !rounded-lg"
+            className="!bg-pulseops-surface !border-pulseops-border !rounded-lg"
             style={{
               '--reactflow-control-bg': '#111318',
               '--reactflow-control-border': '#1E2330',

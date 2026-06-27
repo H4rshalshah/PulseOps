@@ -1,4 +1,4 @@
--- DeadMan Initial Schema Migration
+-- PulseOps Initial Schema Migration
 
 CREATE EXTENSION IF NOT EXISTS "pgcrypto";
 
@@ -94,7 +94,7 @@ CREATE INDEX IF NOT EXISTS idx_webhook_logs_received ON webhook_logs(received_at
 
 -- Insert default settings
 INSERT INTO settings (key, value, category) VALUES
-  ('app_name', 'DeadMan', 'general'),
+  ('app_name', 'PulseOps', 'general'),
   ('timezone', 'UTC', 'general'),
   ('slack_webhook_url', '', 'integrations'),
   ('github_token', '', 'integrations'),

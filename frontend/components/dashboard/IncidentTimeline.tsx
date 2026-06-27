@@ -12,9 +12,9 @@ interface IncidentTimelineProps {
 export default function IncidentTimeline({ incidents }: IncidentTimelineProps) {
   if (incidents.length === 0) {
     return (
-      <div className="bg-deadman-surface border border-deadman-border rounded-xl p-5">
-        <h3 className="text-sm font-medium text-deadman-text mb-4">Recent Incidents</h3>
-        <div className="text-center py-8 text-sm text-deadman-muted">
+      <div className="bg-pulseops-surface border border-pulseops-border rounded-xl p-5">
+        <h3 className="text-sm font-medium text-pulseops-text mb-4">Recent Incidents</h3>
+        <div className="text-center py-8 text-sm text-pulseops-muted">
           No incidents recorded
         </div>
       </div>
@@ -22,8 +22,8 @@ export default function IncidentTimeline({ incidents }: IncidentTimelineProps) {
   }
 
   return (
-    <div className="bg-deadman-surface border border-deadman-border rounded-xl p-5">
-      <h3 className="text-sm font-medium text-deadman-text mb-4">Recent Incidents</h3>
+    <div className="bg-pulseops-surface border border-pulseops-border rounded-xl p-5">
+      <h3 className="text-sm font-medium text-pulseops-text mb-4">Recent Incidents</h3>
       <div className="space-y-1">
         {incidents.slice(0, 8).map((incident, i) => (
           <motion.div
@@ -31,18 +31,18 @@ export default function IncidentTimeline({ incidents }: IncidentTimelineProps) {
             initial={{ opacity: 0, x: -10 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: i * 0.05 }}
-            className="flex items-center gap-3 py-2 px-2 rounded-lg hover:bg-deadman-border/30 transition-colors"
+            className="flex items-center gap-3 py-2 px-2 rounded-lg hover:bg-pulseops-border/30 transition-colors"
           >
             {/* Timeline dot */}
             <div className={`w-2 h-2 rounded-full shrink-0 ${
-              incident.severity === 'critical' ? 'bg-deadman-danger' :
-              incident.severity === 'high' ? 'bg-deadman-warning' :
-              incident.severity === 'medium' ? 'bg-deadman-cyan' : 'bg-deadman-success'
+              incident.severity === 'critical' ? 'bg-pulseops-danger' :
+              incident.severity === 'high' ? 'bg-pulseops-warning' :
+              incident.severity === 'medium' ? 'bg-pulseops-cyan' : 'bg-pulseops-success'
             }`} />
             
             <div className="flex-1 min-w-0">
-              <p className="text-sm text-deadman-text truncate">{incident.title}</p>
-              <p className="text-xs text-deadman-muted">
+              <p className="text-sm text-pulseops-text truncate">{incident.title}</p>
+              <p className="text-xs text-pulseops-muted">
                 {incident.service_name} • {formatDistanceToNow(new Date(incident.created_at), { addSuffix: true })}
               </p>
             </div>

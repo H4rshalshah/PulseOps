@@ -20,17 +20,17 @@ export default function IncidentFeed({ incidents, latestIncidents }: IncidentFee
     return (
       <div className="space-y-2">
         <div className="flex items-center gap-2 mb-4">
-          <AlertTriangle size={16} className="text-deadman-danger" />
-          <h2 className="text-sm font-medium text-deadman-text">Live Incident Feed</h2>
+          <AlertTriangle size={16} className="text-pulseops-danger" />
+          <h2 className="text-sm font-medium text-pulseops-text">Live Incident Feed</h2>
           <div className="flex items-center gap-1 ml-auto">
-            <span className="w-2 h-2 bg-deadman-success rounded-full animate-pulse" />
-            <span className="text-xs text-deadman-muted">Real-time</span>
+            <span className="w-2 h-2 bg-pulseops-success rounded-full animate-pulse" />
+            <span className="text-xs text-pulseops-muted">Real-time</span>
           </div>
         </div>
-        <div className="text-center py-12 border border-dashed border-deadman-border rounded-xl">
-          <AlertTriangle size={32} className="mx-auto mb-3 text-deadman-muted" />
-          <p className="text-sm text-deadman-muted">No active incidents</p>
-          <p className="text-xs text-deadman-muted/60 mt-1">All systems operational</p>
+        <div className="text-center py-12 border border-dashed border-pulseops-border rounded-xl">
+          <AlertTriangle size={32} className="mx-auto mb-3 text-pulseops-muted" />
+          <p className="text-sm text-pulseops-muted">No active incidents</p>
+          <p className="text-xs text-pulseops-muted/60 mt-1">All systems operational</p>
         </div>
       </div>
     );
@@ -39,11 +39,11 @@ export default function IncidentFeed({ incidents, latestIncidents }: IncidentFee
   return (
     <div className="space-y-2">
       <div className="flex items-center gap-2 mb-4">
-        <AlertTriangle size={16} className="text-deadman-danger" />
-        <h2 className="text-sm font-medium text-deadman-text">Live Incident Feed</h2>
+        <AlertTriangle size={16} className="text-pulseops-danger" />
+        <h2 className="text-sm font-medium text-pulseops-text">Live Incident Feed</h2>
         <div className="flex items-center gap-1 ml-auto">
-          <span className="w-2 h-2 bg-deadman-success rounded-full animate-pulse" />
-          <span className="text-xs text-deadman-muted">Real-time</span>
+          <span className="w-2 h-2 bg-pulseops-success rounded-full animate-pulse" />
+          <span className="text-xs text-pulseops-muted">Real-time</span>
         </div>
       </div>
 

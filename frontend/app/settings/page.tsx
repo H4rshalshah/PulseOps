@@ -119,7 +119,7 @@ export default function SettingsPage() {
   if (loading) {
     return (
       <div className="flex items-center justify-center py-24">
-        <Loader2 size={24} className="text-deadman-cyan animate-spin" />
+        <Loader2 size={24} className="text-pulseops-cyan animate-spin" />
       </div>
     );
   }
@@ -127,12 +127,12 @@ export default function SettingsPage() {
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-2xl font-heading font-bold text-deadman-text">Settings</h1>
-        <p className="text-sm text-deadman-muted mt-1">Configure integrations and system preferences</p>
+        <h1 className="text-2xl font-heading font-bold text-pulseops-text">Settings</h1>
+        <p className="text-sm text-pulseops-muted mt-1">Configure integrations and system preferences</p>
       </div>
 
       {/* Tabs */}
-      <div className="flex items-center gap-1 bg-deadman-surface border border-deadman-border rounded-xl p-1">
+      <div className="flex items-center gap-1 bg-pulseops-surface border border-pulseops-border rounded-xl p-1">
         {tabs.map((tab) => {
           const Icon = tab.icon;
           return (
@@ -141,8 +141,8 @@ export default function SettingsPage() {
               onClick={() => setActiveTab(tab.key)}
               className={`flex items-center gap-2 px-4 py-2 text-sm font-medium rounded-lg transition-all ${
                 activeTab === tab.key
-                  ? 'bg-deadman-cyan/10 text-deadman-cyan'
-                  : 'text-deadman-muted hover:text-deadman-text hover:bg-deadman-border/50'
+                  ? 'bg-pulseops-cyan/10 text-pulseops-cyan'
+                  : 'text-pulseops-muted hover:text-pulseops-text hover:bg-pulseops-border/50'
               }`}
             >
               <Icon size={14} />
@@ -162,8 +162,8 @@ export default function SettingsPage() {
             className="space-y-4"
           >
             {['slack_webhook_url', 'github_token', 'pagerduty_api_key'].map((key) => (
-              <div key={key} className="bg-deadman-surface border border-deadman-border rounded-xl p-5">
-                <label className="block text-sm font-medium text-deadman-text mb-2 capitalize">
+              <div key={key} className="bg-pulseops-surface border border-pulseops-border rounded-xl p-5">
+                <label className="block text-sm font-medium text-pulseops-text mb-2 capitalize">
                   {key.replace(/_/g, ' ')}
                 </label>
                 <div className="flex gap-3">
@@ -172,12 +172,12 @@ export default function SettingsPage() {
                     value={editValues[key] || ''}
                     onChange={(e) => setEditValues((prev) => ({ ...prev, [key]: e.target.value }))}
                     placeholder={`Enter ${key.replace(/_/g, ' ')}`}
-                    className="flex-1 bg-deadman-bg border border-deadman-border rounded-lg px-3 py-2 text-sm text-deadman-text placeholder-deadman-muted/50 outline-none focus:border-deadman-cyan/50 transition-colors"
+                    className="flex-1 bg-pulseops-bg border border-pulseops-border rounded-lg px-3 py-2 text-sm text-pulseops-text placeholder-pulseops-muted/50 outline-none focus:border-pulseops-cyan/50 transition-colors"
                   />
                   <button
                     onClick={() => handleTestConnection(key.startsWith('slack') ? 'slack' : key.startsWith('github') ? 'github' : 'pagerduty')}
                     disabled={testing === key}
-                    className="flex items-center gap-1.5 px-4 py-2 text-xs font-medium text-deadman-cyan bg-deadman-cyan/10 border border-deadman-cyan/20 rounded-lg hover:bg-deadman-cyan/20 disabled:opacity-50 transition-all"
+                    className="flex items-center gap-1.5 px-4 py-2 text-xs font-medium text-pulseops-cyan bg-pulseops-cyan/10 border border-pulseops-cyan/20 rounded-lg hover:bg-pulseops-cyan/20 disabled:opacity-50 transition-all"
                   >
                     {testing === (key.startsWith('slack') ? 'slack' : key.startsWith('github') ? 'github' : 'pagerduty') ? (
                       <Loader2 size={12} className="animate-spin" />
@@ -194,7 +194,7 @@ export default function SettingsPage() {
               <button
                 onClick={handleSaveSettings}
                 disabled={saving}
-                className="px-6 py-2 bg-deadman-cyan text-deadman-bg font-medium rounded-xl hover:bg-deadman-cyan/90 disabled:opacity-50 transition-all"
+                className="px-6 py-2 bg-pulseops-cyan text-pulseops-bg font-medium rounded-xl hover:bg-pulseops-cyan/90 disabled:opacity-50 transition-all"
               >
                 {saving ? 'Saving...' : 'Save All'}
               </button>
@@ -211,27 +211,27 @@ export default function SettingsPage() {
             className="space-y-4"
           >
             {/* Add Monitor */}
-            <div className="bg-deadman-surface border border-deadman-border rounded-xl p-5">
-              <h3 className="text-sm font-medium text-deadman-text mb-4">Add Monitor</h3>
+            <div className="bg-pulseops-surface border border-pulseops-border rounded-xl p-5">
+              <h3 className="text-sm font-medium text-pulseops-text mb-4">Add Monitor</h3>
               <div className="flex flex-wrap gap-3">
                 <input
                   type="text"
                   value={newMonitor.name}
                   onChange={(e) => setNewMonitor((prev) => ({ ...prev, name: e.target.value }))}
                   placeholder="Monitor name"
-                  className="flex-1 min-w-[200px] bg-deadman-bg border border-deadman-border rounded-lg px-3 py-2 text-sm text-deadman-text placeholder-deadman-muted/50 outline-none focus:border-deadman-cyan/50 transition-colors"
+                  className="flex-1 min-w-[200px] bg-pulseops-bg border border-pulseops-border rounded-lg px-3 py-2 text-sm text-pulseops-text placeholder-pulseops-muted/50 outline-none focus:border-pulseops-cyan/50 transition-colors"
                 />
                 <input
                   type="url"
                   value={newMonitor.url}
                   onChange={(e) => setNewMonitor((prev) => ({ ...prev, url: e.target.value }))}
                   placeholder="https://example.com/health"
-                  className="flex-1 min-w-[300px] bg-deadman-bg border border-deadman-border rounded-lg px-3 py-2 text-sm text-deadman-text placeholder-deadman-muted/50 outline-none focus:border-deadman-cyan/50 transition-colors"
+                  className="flex-1 min-w-[300px] bg-pulseops-bg border border-pulseops-border rounded-lg px-3 py-2 text-sm text-pulseops-text placeholder-pulseops-muted/50 outline-none focus:border-pulseops-cyan/50 transition-colors"
                 />
                 <select
                   value={newMonitor.method}
                   onChange={(e) => setNewMonitor((prev) => ({ ...prev, method: e.target.value }))}
-                  className="bg-deadman-bg border border-deadman-border rounded-lg px-3 py-2 text-sm text-deadman-text outline-none focus:border-deadman-cyan/50 transition-colors"
+                  className="bg-pulseops-bg border border-pulseops-border rounded-lg px-3 py-2 text-sm text-pulseops-text outline-none focus:border-pulseops-cyan/50 transition-colors"
                 >
                   <option>GET</option>
                   <option>POST</option>
@@ -239,7 +239,7 @@ export default function SettingsPage() {
                 </select>
                 <button
                   onClick={handleAddMonitor}
-                  className="flex items-center gap-1.5 px-4 py-2 bg-deadman-cyan text-deadman-bg font-medium rounded-lg hover:bg-deadman-cyan/90 transition-all"
+                  className="flex items-center gap-1.5 px-4 py-2 bg-pulseops-cyan text-pulseops-bg font-medium rounded-lg hover:bg-pulseops-cyan/90 transition-all"
                 >
                   <Plus size={14} />
                   Add
@@ -249,33 +249,33 @@ export default function SettingsPage() {
 
             {/* Monitors List */}
             {monitors.length === 0 ? (
-              <div className="text-center py-12 border border-dashed border-deadman-border rounded-xl">
-                <p className="text-sm text-deadman-muted">No monitors configured</p>
+              <div className="text-center py-12 border border-dashed border-pulseops-border rounded-xl">
+                <p className="text-sm text-pulseops-muted">No monitors configured</p>
               </div>
             ) : (
               monitors.map((monitor) => (
-                <div key={monitor.id} className="flex items-center gap-4 bg-deadman-surface border border-deadman-border rounded-xl p-4">
-                  <div className={`w-2 h-2 rounded-full ${monitor.is_active ? 'bg-deadman-success' : 'bg-deadman-muted'}`} />
+                <div key={monitor.id} className="flex items-center gap-4 bg-pulseops-surface border border-pulseops-border rounded-xl p-4">
+                  <div className={`w-2 h-2 rounded-full ${monitor.is_active ? 'bg-pulseops-success' : 'bg-pulseops-muted'}`} />
                   <div className="flex-1">
-                    <p className="text-sm font-medium text-deadman-text">{monitor.name}</p>
-                    <p className="text-xs text-deadman-muted font-mono">{monitor.method} {monitor.url}</p>
+                    <p className="text-sm font-medium text-pulseops-text">{monitor.name}</p>
+                    <p className="text-xs text-pulseops-muted font-mono">{monitor.method} {monitor.url}</p>
                   </div>
                   <span className={`text-xs px-2 py-0.5 rounded-full ${
-                    monitor.last_status === 'healthy' ? 'text-deadman-success bg-deadman-success/10' :
-                    monitor.last_status === 'unhealthy' ? 'text-deadman-danger bg-deadman-danger/10' :
-                    'text-deadman-muted bg-deadman-border/50'
+                    monitor.last_status === 'healthy' ? 'text-pulseops-success bg-pulseops-success/10' :
+                    monitor.last_status === 'unhealthy' ? 'text-pulseops-danger bg-pulseops-danger/10' :
+                    'text-pulseops-muted bg-pulseops-border/50'
                   }`}>
                     {monitor.last_status || 'pending'}
                   </span>
                   <button
                     onClick={() => handleCheckMonitor(monitor.id)}
-                    className="px-3 py-1.5 text-xs font-medium text-deadman-cyan bg-deadman-cyan/10 rounded-lg hover:bg-deadman-cyan/20 transition-colors"
+                    className="px-3 py-1.5 text-xs font-medium text-pulseops-cyan bg-pulseops-cyan/10 rounded-lg hover:bg-pulseops-cyan/20 transition-colors"
                   >
                     Check
                   </button>
                   <button
                     onClick={() => handleDeleteMonitor(monitor.id)}
-                    className="p-1.5 text-deadman-danger hover:bg-deadman-danger/10 rounded-lg transition-colors"
+                    className="p-1.5 text-pulseops-danger hover:bg-pulseops-danger/10 rounded-lg transition-colors"
                   >
                     <Trash2 size={14} />
                   </button>
@@ -291,19 +291,19 @@ export default function SettingsPage() {
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
-            className="bg-deadman-surface border border-deadman-border rounded-xl p-5"
+            className="bg-pulseops-surface border border-pulseops-border rounded-xl p-5"
           >
-            <h3 className="text-sm font-medium text-deadman-text mb-4">On-Call Schedule</h3>
-            <p className="text-sm text-deadman-muted mb-6">Configure on-call schedules and escalation policies.</p>
+            <h3 className="text-sm font-medium text-pulseops-text mb-4">On-Call Schedule</h3>
+            <p className="text-sm text-pulseops-muted mb-6">Configure on-call schedules and escalation policies.</p>
             
             <div className="space-y-4">
               {['Primary', 'Secondary', 'Escalation'].map((level, i) => (
-                <div key={i} className="flex items-center gap-4 py-3 border-b border-deadman-border last:border-0">
-                  <span className="text-sm text-deadman-text w-24">{level}</span>
+                <div key={i} className="flex items-center gap-4 py-3 border-b border-pulseops-border last:border-0">
+                  <span className="text-sm text-pulseops-text w-24">{level}</span>
                   <input
                     type="email"
                     placeholder="Email address..."
-                    className="flex-1 bg-deadman-bg border border-deadman-border rounded-lg px-3 py-2 text-sm text-deadman-text placeholder-deadman-muted/50 outline-none focus:border-deadman-cyan/50 transition-colors"
+                    className="flex-1 bg-pulseops-bg border border-pulseops-border rounded-lg px-3 py-2 text-sm text-pulseops-text placeholder-pulseops-muted/50 outline-none focus:border-pulseops-cyan/50 transition-colors"
                   />
                 </div>
               ))}
@@ -317,23 +317,23 @@ export default function SettingsPage() {
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
-            className="bg-deadman-surface border border-deadman-border rounded-xl p-5 space-y-4"
+            className="bg-pulseops-surface border border-pulseops-border rounded-xl p-5 space-y-4"
           >
             <div>
-              <label className="block text-sm font-medium text-deadman-text mb-2">Application Name</label>
+              <label className="block text-sm font-medium text-pulseops-text mb-2">Application Name</label>
               <input
                 type="text"
-                value={editValues.app_name || 'DeadMan'}
+                value={editValues.app_name || 'PulseOps'}
                 onChange={(e) => setEditValues((prev) => ({ ...prev, app_name: e.target.value }))}
-                className="w-full max-w-md bg-deadman-bg border border-deadman-border rounded-lg px-3 py-2 text-sm text-deadman-text placeholder-deadman-muted/50 outline-none focus:border-deadman-cyan/50 transition-colors"
+                className="w-full max-w-md bg-pulseops-bg border border-pulseops-border rounded-lg px-3 py-2 text-sm text-pulseops-text placeholder-pulseops-muted/50 outline-none focus:border-pulseops-cyan/50 transition-colors"
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-deadman-text mb-2">Timezone</label>
+              <label className="block text-sm font-medium text-pulseops-text mb-2">Timezone</label>
               <select
                 value={editValues.timezone || 'UTC'}
                 onChange={(e) => setEditValues((prev) => ({ ...prev, timezone: e.target.value }))}
-                className="w-full max-w-md bg-deadman-bg border border-deadman-border rounded-lg px-3 py-2 text-sm text-deadman-text outline-none focus:border-deadman-cyan/50 transition-colors"
+                className="w-full max-w-md bg-pulseops-bg border border-pulseops-border rounded-lg px-3 py-2 text-sm text-pulseops-text outline-none focus:border-pulseops-cyan/50 transition-colors"
               >
                 <option value="UTC">UTC</option>
                 <option value="America/New_York">America/New_York (EST)</option>
@@ -346,7 +346,7 @@ export default function SettingsPage() {
               <button
                 onClick={handleSaveSettings}
                 disabled={saving}
-                className="px-6 py-2 bg-deadman-cyan text-deadman-bg font-medium rounded-xl hover:bg-deadman-cyan/90 disabled:opacity-50 transition-all"
+                className="px-6 py-2 bg-pulseops-cyan text-pulseops-bg font-medium rounded-xl hover:bg-pulseops-cyan/90 disabled:opacity-50 transition-all"
               >
                 {saving ? 'Saving...' : 'Save Settings'}
               </button>

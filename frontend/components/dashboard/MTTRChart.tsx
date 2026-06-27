@@ -31,8 +31,8 @@ export default function MTTRChart({ data: propData, height = 300 }: MTTRChartPro
 
   if (loading) {
     return (
-      <div className="h-[300px] bg-deadman-surface border border-deadman-border rounded-xl animate-pulse flex items-center justify-center">
-        <span className="text-xs text-deadman-muted">Loading chart...</span>
+      <div className="h-[300px] bg-pulseops-surface border border-pulseops-border rounded-xl animate-pulse flex items-center justify-center">
+        <span className="text-xs text-pulseops-muted">Loading chart...</span>
       </div>
     );
   }
@@ -44,8 +44,8 @@ export default function MTTRChart({ data: propData, height = 300 }: MTTRChartPro
   }));
 
   return (
-    <div className="bg-deadman-surface border border-deadman-border rounded-xl p-5">
-      <h3 className="text-sm font-medium text-deadman-text mb-4">MTTR Trend (Last 30 Days)</h3>
+    <div className="bg-pulseops-surface border border-pulseops-border rounded-xl p-5">
+      <h3 className="text-sm font-medium text-pulseops-text mb-4">MTTR Trend (Last 30 Days)</h3>
       <ResponsiveContainer width="100%" height={height}>
         <LineChart data={chartData}>
           <CartesianGrid strokeDasharray="3 3" stroke="#1E2330" />

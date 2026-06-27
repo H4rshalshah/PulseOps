@@ -24,11 +24,11 @@
   }
 
   * {
-    @apply border-deadman-border;
+    @apply border-pulseops-border;
   }
 
   html {
-    @apply bg-deadman-bg text-deadman-text;
+    @apply bg-pulseops-bg text-pulseops-text;
     scroll-behavior: smooth;
     /* Only transition on the root element — inner elements inherit instantly */
     transition: background-color 0.25s ease, color 0.25s ease;

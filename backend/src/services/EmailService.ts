@@ -7,8 +7,8 @@ const logger = winston.createLogger({
   transports: [new winston.transports.Console()],
 });
 
-const FROM_EMAIL = process.env.EMAIL_FROM || 'noreply@deadman.dev';
-const FROM_NAME = 'DeadMan Incident Response';
+const FROM_EMAIL = process.env.EMAIL_FROM || 'noreply@pulseops.dev';
+const FROM_NAME = 'PulseOps Incident Response';
 
 // Create transporter - returns null if not configured (falls back to console logging)
 function getTransporter(): nodemailer.Transporter | null {
@@ -59,16 +59,16 @@ export class EmailService {
       await transporter.sendMail({
         from: `"${FROM_NAME}" <${FROM_EMAIL}>`,
         to: email,
-        subject: 'Reset your DeadMan password',
+        subject: 'Reset your PulseOps password',
         html: `
           <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; max-width: 480px; margin: 0 auto; padding: 24px; background: #0A0C10; border-radius: 12px;">
             <div style="text-align: center; margin-bottom: 24px;">
-              <span style="color: #00D4FF; font-size: 24px; font-weight: 700;">DeadMan</span>
+              <span style="color: #00D4FF; font-size: 24px; font-weight: 700;">PulseOps</span>
             </div>
             <h1 style="color: #E8EBF0; font-size: 20px; margin-bottom: 12px;">Password Reset</h1>
             <p style="color: #6B7A99; font-size: 14px; line-height: 1.6;">
               Hi ${userName},<br /><br />
-              We received a request to reset your DeadMan account password. Click the button below to set a new password. This link expires in 1 hour.
+              We received a request to reset your PulseOps account password. Click the button below to set a new password. This link expires in 1 hour.
             </p>
             <div style="text-align: center; margin: 24px 0;">
               <a href="${resetLink}" style="display: inline-block; padding: 12px 32px; background: #00D4FF; color: #000; text-decoration: none; border-radius: 8px; font-weight: 600; font-size: 14px;">
@@ -118,11 +118,11 @@ export class EmailService {
       await transporter.sendMail({
         from: `"${FROM_NAME}" <${FROM_EMAIL}>`,
         to: email,
-        subject: 'Verify your DeadMan email address',
+        subject: 'Verify your PulseOps email address',
         html: `
           <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; max-width: 480px; margin: 0 auto; padding: 24px; background: #0A0C10; border-radius: 12px;">
             <div style="text-align: center; margin-bottom: 24px;">
-              <span style="color: #00D4FF; font-size: 24px; font-weight: 700;">DeadMan</span>
+              <span style="color: #00D4FF; font-size: 24px; font-weight: 700;">PulseOps</span>
             </div>
             <h1 style="color: #E8EBF0; font-size: 20px; margin-bottom: 12px;">Verify Your Email</h1>
             <p style="color: #6B7A99; font-size: 14px; line-height: 1.6;">

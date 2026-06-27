@@ -31,15 +31,15 @@ function StepNode({ data, selected }: NodeProps) {
     <div
       className={`px-4 py-3 rounded-xl border-2 min-w-[180px] transition-all ${
         selected
-          ? 'border-deadman-cyan shadow-lg shadow-deadman-cyan/20'
-          : 'border-deadman-border hover:border-deadman-cyan/50'
+          ? 'border-pulseops-cyan shadow-lg shadow-pulseops-cyan/20'
+          : 'border-pulseops-border hover:border-pulseops-cyan/50'
       }`}
       style={{ backgroundColor: '#111318' }}
     >
       <Handle
         type="target"
         position={Position.Top}
-        className="!bg-deadman-border !w-3 !h-3 !border-2 !border-deadman-bg"
+        className="!bg-pulseops-border !w-3 !h-3 !border-2 !border-pulseops-bg"
       />
       
       <div className="flex items-center gap-3">
@@ -47,15 +47,15 @@ function StepNode({ data, selected }: NodeProps) {
           <Icon size={16} color={color} />
         </div>
         <div className="flex-1 min-w-0">
-          <p className="text-sm font-medium text-deadman-text truncate">{data.label as string}</p>
-          <p className="text-xs text-deadman-muted capitalize">{type}</p>
+          <p className="text-sm font-medium text-pulseops-text truncate">{data.label as string}</p>
+          <p className="text-xs text-pulseops-muted capitalize">{type}</p>
         </div>
       </div>
 
       <Handle
         type="source"
         position={Position.Bottom}
-        className="!bg-deadman-border !w-3 !h-3 !border-2 !border-deadman-bg"
+        className="!bg-pulseops-border !w-3 !h-3 !border-2 !border-pulseops-bg"
       />
     </div>
   );

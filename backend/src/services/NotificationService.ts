@@ -32,7 +32,7 @@ export class NotificationService {
           payload: {
             summary: `Incident escalation: ${incidentId}`,
             severity: 'critical',
-            source: 'DeadMan',
+            source: 'PulseOps',
           },
         },
         {
@@ -51,7 +51,7 @@ export class NotificationService {
       return { success: false, message: 'Slack webhook URL not configured' };
     }
     try {
-      await axios.post(config.slackWebhookUrl, { text: '🧪 DeadMan test notification - Connection successful!' });
+      await axios.post(config.slackWebhookUrl, { text: '🧪 PulseOps test notification - Connection successful!' });
       return { success: true, message: 'Slack webhook is working' };
     } catch (error) {
       return { success: false, message: error instanceof Error ? error.message : 'Connection failed' };

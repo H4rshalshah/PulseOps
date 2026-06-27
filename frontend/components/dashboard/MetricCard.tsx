@@ -19,10 +19,10 @@ const iconMap = {
 };
 
 const colorMap = {
-  incidents: { bg: 'bg-deadman-danger/10', border: 'border-deadman-danger/20', text: 'text-deadman-danger' },
-  mttr: { bg: 'bg-deadman-cyan/10', border: 'border-deadman-cyan/20', text: 'text-deadman-cyan' },
-  active: { bg: 'bg-deadman-success/10', border: 'border-deadman-success/20', text: 'text-deadman-success' },
-  actions: { bg: 'bg-deadman-warning/10', border: 'border-deadman-warning/20', text: 'text-deadman-warning' },
+  incidents: { bg: 'bg-pulseops-danger/10', border: 'border-pulseops-danger/20', text: 'text-pulseops-danger' },
+  mttr: { bg: 'bg-pulseops-cyan/10', border: 'border-pulseops-cyan/20', text: 'text-pulseops-cyan' },
+  active: { bg: 'bg-pulseops-success/10', border: 'border-pulseops-success/20', text: 'text-pulseops-success' },
+  actions: { bg: 'bg-pulseops-warning/10', border: 'border-pulseops-warning/20', text: 'text-pulseops-warning' },
 };
 
 function MetricCardComponent({ title, value, subtitle, icon, trend }: MetricCardProps) {
@@ -32,20 +32,20 @@ function MetricCardComponent({ title, value, subtitle, icon, trend }: MetricCard
   return (
     <div className={`${colors.bg} ${colors.border} border rounded-xl p-5`}>
       <div className="flex items-start justify-between mb-3">
-        <span className="text-xs font-medium text-deadman-muted uppercase tracking-wider">{title}</span>
+        <span className="text-xs font-medium text-pulseops-muted uppercase tracking-wider">{title}</span>
         <div className={`p-2 rounded-lg ${colors.bg}`}>
           <Icon size={18} className={colors.text} />
         </div>
       </div>
       <div className="flex items-end gap-2">
-        <span className="text-3xl font-bold font-mono text-deadman-text">{value}</span>
+        <span className="text-3xl font-bold font-mono text-pulseops-text">{value}</span>
         {trend && (
-          <span className={`text-xs font-medium mb-1 ${trend.positive ? 'text-deadman-success' : 'text-deadman-danger'}`}>
+          <span className={`text-xs font-medium mb-1 ${trend.positive ? 'text-pulseops-success' : 'text-pulseops-danger'}`}>
             {trend.positive ? '+' : '-'}{trend.value}%
           </span>
         )}
       </div>
-      {subtitle && <p className="text-xs text-deadman-muted mt-1">{subtitle}</p>}
+      {subtitle && <p className="text-xs text-pulseops-muted mt-1">{subtitle}</p>}
     </div>
   );
 }
